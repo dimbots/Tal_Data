@@ -219,7 +219,7 @@ mkdir peak_calling
 
 #	SET DIR PEAK_CALLING
 cd peak_calling/
-ln -s /media/dimbo/disk/GenOptics/data/genomes/genes_info/mm10-blacklist.v2.bed .
+ln -s /media/dimbo/10T/data/talianidis_data/genomes/mm10/genes_info/mm10-blacklist.v2.bed .
 ln -s ../mapping/*.bam .
 ln -s ../mapping/*.bam.bai .
 
@@ -245,8 +245,8 @@ ln -s ../mapping/*.bam.bai .
 				break
 			else
 
-			macs2 callpeak --treatment $treatment --control $input --nomodel --broad --broad-cutoff=0.01 --format BAM --gsize mm -n $out
-
+#			macs2 callpeak --treatment $treatment --control $input --nomodel --broad --broad-cutoff=0.01 --format BAM --gsize mm -n $out
+			macs2 callpeak --treatment $treatment --control $input --nomodel --broad --broad --format BAM --gsize mm -n $out
 		fi
 
 		done
@@ -575,10 +575,128 @@ done
 	tput setaf 1; tput bold; echo "---------------------"
 
 
-######################################################################################################
+#############################################################################################################################################
+
+# IDENTIFY SUPER ENHANCERS (ROSE)
+
+#############################################################################################################################################
 
 
+#!/bin/bash
 
+tput setaf 1; tput bold; echo "                     "
+tput setaf 1; tput bold; echo "                     "
+tput setaf 1; tput bold; echo "                     "
+
+tput setaf 2; tput bold; echo "INITIATE SUPER ENHANCER ANALYSIS? TYPE Y or N"
+
+	read SE
+
+	if
+	[[ $SE = "Y" ]]
+
+	then
+
+#	SET DIR FASTQ
+	cd ../
+#	CREATE SE DIR
+	mkdir SE
+#	SET SE DIR
+	cd SE/
+
+	ln -s ../peak_calling/merged_peaks/*.bed .
+	ln -s ../mapping/*.bam .
+
+	tput setaf 2; tput bold; echo "RENAME BAM FILES WHEN FINISH TYPE OK"
+	read resp
+
+# MERGE BAM FILES
+
+	while [[ $merged != "none" ]]
+
+		do
+
+		tput setaf 2; tput bold; echo "TYPE MERGED BAM FILE. E.G Set8Ko_merged.bam.  WHEN FINISHED TYPE none"
+		read merged
+		tput setaf 2; tput bold; echo "TYPE REPLICATE A BAM FILE. WHEN FINISHED TYPE none"
+		read rep_A
+		tput setaf 2; tput bold; echo "TYPE REPLICATE B BAM FILE. WHEN FINISHED TYPE none"
+		read rep_B
+
+		if	[[ $merged = "none" ]]
+			then
+			break
+		else
+
+		samtools merge -@ 8 $merged $rep_A $rep_B
+		samtools index $merged
+		fi
+		done
+
+# MAKE GFF FILES
+
+	while [[ $peaks_bed != "none" ]]
+
+		do
+
+		tput setaf 2; tput bold; echo "TYPE PEAKS BED FILE. ELSE TYPE none"
+		read peaks_bed
+
+		if     [[ $peaks_bed = "none" ]]
+			then
+			break
+
+		else
+
+# Remove unique IDS (in order to run ROSE)
+		sort -u -k4 $peaks_bed > "$peaks_bed_uniq.tmp"
+
+# convert to ROSE gff Format
+		gff="$peaks_bed.gff"
+		awk '{print $1,$4,$10,$2,$3,$10,$6,$10,$4}' OFS='\t' "$peaks_bed_uniq.tmp" > $gff
+
+		fi
+		done
+# Run ROSE - IDENTIFY SUPER ENHACERS
+
+	mkdir run_rose
+	cd run_rose
+	cp -r /home/dimbo/rose/* .
+	ln -s ../* .
+
+	while [[ $merged_gff != "none" ]]
+
+	do
+
+	tput setaf 2; tput bold; echo "TYPE GFF FILE. ELSE TYPE none"
+	read merged_gff
+
+	tput setaf 2; tput bold; echo "TYPE MERGED TREATMENT BAM FILE. ELSE TYPE none"
+	read treatment_merged_bam
+
+	tput setaf 2; tput bold; echo "TYPE MERGED INPUT BAM FILE. ELSE TYPE none"
+	read input_merged_bam
+
+	tput setaf 2; tput bold; echo "SE OUT FILE. ELSE TYPE none"
+	read out
+
+	if      [[ $merged_gff = "none" ]]
+		then
+		break
+
+		else
+
+		mkdir $out
+
+# Run ROSE. Identify SUPER ENHANCERS
+python ROSE_main.py --genome MM10 --i $merged_gff --rankby $treatment_merged_bam --control $input_merged_bam --out $out
+		fi
+		done
+
+
+else
+	echo "SUPER ENHANCER ANALYSIS ABORTED"
+fi
 
 
 
