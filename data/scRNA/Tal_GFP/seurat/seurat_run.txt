@@ -7,7 +7,7 @@ library(magrittr)
 library(ggplot2)
 library(cowplot)
 
-############################################################################################################
+########################################################################################################################################################################################################################
 
 # CREATE OBJECT Lgr5Cre_SETDB1KO
 
@@ -21,7 +21,7 @@ Lgr5Cre_Setdb1KO_B = CreateSeuratObject(counts = Lgr5Cre_Setdb1KO_B.data, projec
 # Merge objects
 Lgr5Cre_Setdb1KO=merge(Lgr5Cre_Setdb1KO_A, y=Lgr5Cre_Setdb1KO_B, add.cell.ids=c("Rep_A","Rep_B"), project="Lgr5Cre_Setdb1KO")
 
-############################################################################################################
+##################################################################################################################################################################################################################
 
 # CREATE OBJECT LGR5Cre_WT
 
@@ -35,10 +35,9 @@ Lgr5Cre_WT_B = CreateSeuratObject(counts = Lgr5Cre_WT_B.data, project = "Lgr5Cre
 # Merge objects
 Lgr5Cre_WT=merge(Lgr5Cre_WT_A, y=Lgr5Cre_WT_B, add.cell.ids=c("Rep_A","Rep_B"), project="Lgr5Cre_WT")
 
+##################################################################################################################################################################################################################
 
-############################################################################################################
 #FIND DOUBLETS IN EACH CONDITION SEPARATELY
-############################################################################################################
 
 Lgr5Cre_Setdb1KO <- NormalizeData(Lgr5Cre_Setdb1KO, normalization.method = "LogNormalize", scale.factor = 10000)
 
@@ -66,8 +65,7 @@ dev.off()
 
 Lgr5Cre_Setdb1KO.filt = Lgr5Cre_Setdb1KO.filt[, Lgr5Cre_Setdb1KO.filt@meta.data[, DF.name] == "Singlet"]
 
-############################################################################################################
-############################################################################################################
+##################################################################################################################################################################################################################
 
 Lgr5Cre_WT <- NormalizeData(Lgr5Cre_WT, normalization.method = "LogNormalize", scale.factor = 10000)
 
@@ -93,7 +91,7 @@ pdf("VlnPlot_WT.pdf", width=15, height=8)
 VlnPlot(Lgr5Cre_WT.filt, features = "nFeature_RNA", group.by = DF.name, pt.size = 0.1)
 dev.off()
 
-#############################################################################################################
+##################################################################################################################################################################################################################
 
 # Merge Setdb1KO with WT to new object Lgr5Cre_MERGED
 Lgr5Cre_MERGED=merge(Lgr5Cre_Setdb1KO.filt, y=Lgr5Cre_WT.filt, add.cell.ids=c("Setdb1KO","Lgr5Cre"), project="Lgr5Cre_MERGED")
@@ -101,7 +99,7 @@ Lgr5Cre_MERGED=merge(Lgr5Cre_Setdb1KO.filt, y=Lgr5Cre_WT.filt, add.cell.ids=c("S
 # Change replicates names within object. e.g(Setdb1KO_repA & Setdb1KO_repB -> Setdb1KO)
 Lgr5Cre_MERGED$orig.ident=plyr::mapvalues(x=Lgr5Cre_MERGED$orig.ident, from = c("Setdb1KO A", "Setdb1KO B", "Lgr5Cre A", "Lgr5Cre B"), to = c("Setdb1KO", "Setdb1KO", "Lgr5Cre", "Lgr5Cre"))
 
-############################################################################################################
+##################################################################################################################################################################################################################
 
 # QC and selecting cells
 Lgr5Cre_MERGED[["percent.mt"]] <- PercentageFeatureSet(Lgr5Cre_MERGED, pattern = "^mt-")
@@ -223,9 +221,11 @@ DotPlot(Lgr5Cre_MERGED, cols = c("blue", "orange"), group.by = "orig.ident", fea
 dev.off()
 
 # Dot plot per selected Markers
-#pdf("DotPlot_Lgr5cre_MERGED_orig.ident_MARKERS_TOP10.pdf", width=15, height=8)
-#DotPlot(Lgr5Cre_MERGED, features = c("Reg3g", "Gsdmc4", "Prss32", "Krt8", "Elf3", "Sis", "Fabp1", "Hnf4a", "Tmigd1", "Fabp6"), split.by = "orig.ident")
-#dev.off()
+pdf("Top10_Markers.pdf", width=15, height=8)
+DotPlot(Lgr5Cre_MERGED, features = c("Reg3g", "Gsdmc4", "Prss32", "Krt8", "Elf3", "Sis", "Fabp1", "Hnf4a", "Tmigd1", "Fabp6"), split.by = "orig.ident")
+dev.off()
+
+##################################################################################################################################################################################################################
 
 # Extract metadata
 md = Lgr5Cre_MERGED@meta.data %>% as.data.table()
@@ -236,26 +236,53 @@ md[, .N, by = c("orig.ident", "seurat_clusters")] %>% dcast(., orig.ident ~ seur
 write.table(all.genes, file = "all_genes.tsv", sep = "\t", row.names = TRUE)
 
 # Find all markers distinguishing cluster 0 from the rest of the clusters
-#cluster0.markers <- FindMarkers(Lgr5Cre_MERGED,ident.1 = 0, ident.2 = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14), min.pct = 0.25)
-#cluster1.markers <- FindMarkers(Lgr5Cre_MERGED,ident.1 = 1, ident.2 = c(0,2,3,4,5,6,7,8,9,10,11,12,13,14), min.pct = 0.25)
-#cluster2.markers <- FindMarkers(Lgr5Cre_MERGED,ident.1 = 2, ident.2 = c(0,1,3,4,5,6,7,8,9,10,11,12,13,14), min.pct = 0.25)
-#cluster3.markers <- FindMarkers(Lgr5Cre_MERGED,ident.1 = 3, ident.2 = c(0,1,2,4,5,6,7,8,9,10,11,12,13,14), min.pct = 0.25)
-#cluster4.markers <- FindMarkers(Lgr5Cre_MERGED,ident.1 = 4, ident.2 = c(0,1,2,3,5,6,7,8,9,10,11,12,13,14), min.pct = 0.25)
-#cluster5.markers <- FindMarkers(Lgr5Cre_MERGED,ident.1 = 5, ident.2 = c(0,1,2,3,4,6,7,8,9,10,11,12,13,14), min.pct = 0.25)
-#cluster6.markers <- FindMarkers(Lgr5Cre_MERGED,ident.1 = 6, ident.2 = c(0,1,2,3,4,5,7,8,9,10,11,12,13,14), min.pct = 0.25)
-#cluster7.markers <- FindMarkers(Lgr5Cre_MERGED,ident.1 = 7, ident.2 = c(0,1,2,3,4,5,6,8,9,10,11,12,13,14), min.pct = 0.25)
-#cluster8.markers <- FindMarkers(Lgr5Cre_MERGED,ident.1 = 8, ident.2 = c(0,1,2,3,4,5,6,7,9,10,11,12,13,14), min.pct = 0.25)
-#cluster9.markers <- FindMarkers(Lgr5Cre_MERGED,ident.1 = 9, ident.2 = c(0,1,2,3,4,5,6,7,8,10,11,12,13,14), min.pct = 0.25)
-#cluster10.markers <- FindMarkers(Lgr5Cre_MERGED,ident.1 = 10, ident.2 = c(0,1,2,3,4,5,6,7,8,9,11,12,13,14), min.pct = 0.25)
-#cluster11.markers <- FindMarkers(Lgr5Cre_MERGED,ident.1 = 11, ident.2 = c(0,1,2,3,4,5,6,7,8,9,10,12,13,14), min.pct = 0.25)
-#cluster12.markers <- FindMarkers(Lgr5Cre_MERGED,ident.1 = 12, ident.2 = c(0,1,2,3,4,5,6,7,8,9,10,11,13,14), min.pct = 0.25)
-#cluster13.markers <- FindMarkers(Lgr5Cre_MERGED,ident.1 = 13, ident.2 = c(0,1,2,3,4,5,6,7,8,9,10,11,12,14), min.pct = 0.25)
-#cluster14.markers <- FindMarkers(Lgr5Cre_MERGED,ident.1 = 14, ident.2 = c(0,1,2,3,4,5,6,7,8,9,10,11,12,13), min.pct = 0.25)
+cluster0.markers <- FindMarkers(Lgr5Cre_MERGED,ident.1 = 0, ident.2 = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14), min.pct = 0.25, logfc.threshold = 0.37)
+cluster1.markers <- FindMarkers(Lgr5Cre_MERGED,ident.1 = 1, ident.2 = c(0,2,3,4,5,6,7,8,9,10,11,12,13,14), min.pct = 0.25, logfc.threshold = 0.37)
+cluster2.markers <- FindMarkers(Lgr5Cre_MERGED,ident.1 = 2, ident.2 = c(0,1,3,4,5,6,7,8,9,10,11,12,13,14), min.pct = 0.25, logfc.threshold = 0.37)
+cluster3.markers <- FindMarkers(Lgr5Cre_MERGED,ident.1 = 3, ident.2 = c(0,1,2,4,5,6,7,8,9,10,11,12,13,14), min.pct = 0.25, logfc.threshold = 0.37)
+cluster4.markers <- FindMarkers(Lgr5Cre_MERGED,ident.1 = 4, ident.2 = c(0,1,2,3,5,6,7,8,9,10,11,12,13,14), min.pct = 0.25, logfc.threshold = 0.37)
+cluster5.markers <- FindMarkers(Lgr5Cre_MERGED,ident.1 = 5, ident.2 = c(0,1,2,3,4,6,7,8,9,10,11,12,13,14), min.pct = 0.25, logfc.threshold = 0.37)
+cluster6.markers <- FindMarkers(Lgr5Cre_MERGED,ident.1 = 6, ident.2 = c(0,1,2,3,4,5,7,8,9,10,11,12,13,14), min.pct = 0.25, logfc.threshold = 0.37)
+cluster7.markers <- FindMarkers(Lgr5Cre_MERGED,ident.1 = 7, ident.2 = c(0,1,2,3,4,5,6,8,9,10,11,12,13,14), min.pct = 0.25, logfc.threshold = 0.37)
+cluster8.markers <- FindMarkers(Lgr5Cre_MERGED,ident.1 = 8, ident.2 = c(0,1,2,3,4,5,6,7,9,10,11,12,13,14), min.pct = 0.25, logfc.threshold = 0.37)
+cluster9.markers <- FindMarkers(Lgr5Cre_MERGED,ident.1 = 9, ident.2 = c(0,1,2,3,4,5,6,7,8,10,11,12,13,14), min.pct = 0.25, logfc.threshold = 0.37)
+cluster10.markers <- FindMarkers(Lgr5Cre_MERGED,ident.1 = 10, ident.2 = c(0,1,2,3,4,5,6,7,8,9,11,12,13,14), min.pct = 0.25, logfc.threshold = 0.37)
+cluster11.markers <- FindMarkers(Lgr5Cre_MERGED,ident.1 = 11, ident.2 = c(0,1,2,3,4,5,6,7,8,9,10,12,13,14), min.pct = 0.25, logfc.threshold = 0.37)
+cluster12.markers <- FindMarkers(Lgr5Cre_MERGED,ident.1 = 12, ident.2 = c(0,1,2,3,4,5,6,7,8,9,10,11,13,14), min.pct = 0.25, logfc.threshold = 0.37)
+cluster13.markers <- FindMarkers(Lgr5Cre_MERGED,ident.1 = 13, ident.2 = c(0,1,2,3,4,5,6,7,8,9,10,11,12,14), min.pct = 0.25, logfc.threshold = 0.37)
+cluster14.markers <- FindMarkers(Lgr5Cre_MERGED,ident.1 = 14, ident.2 = c(0,1,2,3,4,5,6,7,8,9,10,11,12,13), min.pct = 0.25, logfc.threshold = 0.37)
+
+# Save files
+write.table(cluster0.markers, file = "cluster0.markers.tsv", sep = "\t", row.names = TRUE)
+write.table(cluster1.markers, file = "cluster1.markers.tsv", sep = "\t", row.names = TRUE)
+write.table(cluster2.markers, file = "cluster2.markers.tsv", sep = "\t", row.names = TRUE)
+write.table(cluster3.markers, file = "cluster3.markers.tsv", sep = "\t", row.names = TRUE)
+write.table(cluster4.markers, file = "cluster4.markers.tsv", sep = "\t", row.names = TRUE)
+write.table(cluster5.markers, file = "cluster5.markers.tsv", sep = "\t", row.names = TRUE)
+write.table(cluster6.markers, file = "cluster6.markers.tsv", sep = "\t", row.names = TRUE)
+write.table(cluster7.markers, file = "cluster7.markers.tsv", sep = "\t", row.names = TRUE)
+write.table(cluster8.markers, file = "cluster8.markers.tsv", sep = "\t", row.names = TRUE)
+write.table(cluster9.markers, file = "cluster9.markers.tsv", sep = "\t", row.names = TRUE)
+write.table(cluster10.markers, file = "cluster10.markers.tsv", sep = "\t", row.names = TRUE)
+write.table(cluster11.markers, file = "cluster11.markers.tsv", sep = "\t", row.names = TRUE)
+write.table(cluster12.markers, file = "cluster12.markers.tsv", sep = "\t", row.names = TRUE)
+write.table(cluster13.markers, file = "cluster13.markers.tsv", sep = "\t", row.names = TRUE)
+write.table(cluster14.markers, file = "cluster14.markers.tsv", sep = "\t", row.names = TRUE)
+
+# Mat code
+#Lgr5Cre_MERGED.markers = FindAllMarkers(Lgr5Cre_MERGED, only.pos = F, min.pct = 0.25, logfc.threshold = 0.37)
+
+##################################################################################################################################################################################################################
+
+# Feature Plots based on most variable features per cluster
+
+pdf("Feature plot, 0 cluster Markers.pdf", width=15, height=8)
+FeaturePlot(Lgr5Cre_MERGED, features = c("Olfm4", "Gkn3", "Ifitm3", "Jaml", "2410006H16Rik", "Slc12a2", "Cd74", "Clca3b", "Pdgfa"), split.by = "orig.ident", cols = c("grey", "red"))
+dev.off()
+
+##################################################################################################################################################################################################################
 
 # DotPlots per Cluster
-
-############################################################################################################
-############################################################################################################
 
 pdf("Enterocyte_Immature Markers.pdf", width=15, height=8)
 p =  DotPlot(Lgr5Cre_MERGED,features = c("Reg3g", "Gsdmc4", "Prss32", "Krt8"),cols = c("blue","orange"))
@@ -329,8 +356,7 @@ p = DotPlot(Lgr5Cre_MERGED,features = c("Mbl2","Ptprs","C4bp","Icam1","Ptpn22","
 p + ggtitle("Nature Paper Markers")
 dev.off()
 
-############################################################################################################
-############################################################################################################
+##################################################################################################################################################################################################################
 
 # Dot plots per condition
 
@@ -406,8 +432,7 @@ p = DotPlot(Lgr5Cre_MERGED,features = c("Mbl2","Ptprs","C4bp","Icam1","Ptpn22","
 p + ggtitle("Nature Paper Markers")
 dev.off()
 
-
-#######################################################################################################################################33
+##################################################################################################################################################################################################################
 
 # Umap renamed cluster
 pdf("Umap_renamed_Clusterd Markers.pdf", width=15, height=8)
@@ -415,7 +440,7 @@ Lgr5Cre_MERGED_Renamed=RenameIdents(Lgr5Cre_MERGED,  `0` = "Stem", `1` = "Entero
 DimPlot(Lgr5Cre_MERGED_Renamed, label = TRUE)
 dev.off()
 
-#######################################################################################################################################
+##################################################################################################################################################################################################################
 
 # Split violin plots per markers
 pdf("Violin Plot_Birc5.pdf", width=15, height=10)
@@ -435,7 +460,7 @@ pdf("RidgePlot_Olfm4.pdf", width=15, height=10)
 RidgePlot(Lgr5Cre_MERGED_Renamed, features = c("Olfm4"), ncol = 2)
 dev.off()
 
-#######################################################################################################################################
+##################################################################################################################################################################################################################
 
 # Cell cycle
 
@@ -465,5 +490,4 @@ Lgr5Cre_MERGED <- ScaleData(Lgr5Cre_MERGED, vars.to.regress = c("S.Score", "G2M.
 Lgr5Cre_MERGED <- RunPCA(Lgr5Cre_MERGED, features = VariableFeatures(Lgr5Cre_MERGED), nfeatures.print = 10)
 
 Lgr5Cre_MERGED <- RunPCA(Lgr5Cre_MERGED, features = c(s.genes, g2m.genes))
-
-
+DimPlot(Lgr5Cre_MERGED)
