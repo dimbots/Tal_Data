@@ -14,9 +14,9 @@
 for ((x = $1; x <= $2; x++))
 
 do
-	sample_fastq="${x}.fastq.gz"
-	sample_trimmed="${x}.T.fastq.gz"
-	fastq="${x}.fastq.gz"
+	sample_fastq="0${x}.fastq.gz"
+	sample_trimmed="0${x}.T.fastq.gz"
+	fastq="0${x}.fastq.gz"
 
 	fastqc $sample_fastq
 
@@ -71,13 +71,13 @@ fastqc *.gz
 for ((x = $1; x <= $2; x++))
 
 do
-	sample="${x}.testing"
-	summary="summary_${x}.txt"
-	fastq_input="${x}.T.fastq.gz"
-	input_sam="${x}.sam"
-	output_bam_tmp="${x}.bam.tmp"
-	output_bam="${x}.bam"
-	output_sorted_bam="${x}.sorted.bam"
+	sample="0${x}.testing"
+	summary="summary_0${x}.txt"
+	fastq_input="0${x}.T.fastq.gz"
+	input_sam="0${x}.sam"
+	output_bam_tmp="0${x}.bam.tmp"
+	output_bam="0${x}.bam"
+	output_sorted_bam="0${x}.sorted.bam"
 
 	tput setaf 1; tput bold; echo "processing sample $fastq_input"
 
@@ -105,12 +105,12 @@ done
 for ((x = $1; x <= $2; x++))
 
 do
-        sample="${x}.testing"
-        summary="summary_${x}.txt"
-        fastq_input="${x}.T.fastq.gz"
-        input_sam="${x}.sam"
-        unsorted_bam="${x}.unsorted.bam.tmp"
-        sorted_bam="${x}.bam"
+        sample="0${x}.testing"
+        summary="summary_0${x}.txt"
+        fastq_input="0${x}.T.fastq.gz"
+        input_sam="0${x}.sam"
+        unsorted_bam="0${x}.unsorted.bam.tmp"
+        sorted_bam="0${x}.bam"
 
 # mapping bowite2
 bowtie2 -p 8 --sensitive-local -x $genome -U $fastq_input -S $input_sam >> $summary 2>&1
@@ -148,13 +148,13 @@ mv *.bam *.bai *.txt mapping/
 for ((x = $1; x <= $2; x++))
 
 do
-	sum_file="summary_${x}.txt"
+	sum_file="summary_0${x}.txt"
 
 	uniq="uniq.tmp"
 	repeat="repeat.tmp"
 	uniq_repeat="uniq_repeat.tsv"
 	identifier="identifier.tsv"
-	id="${x}.sorted.bam"
+	id="0${x}.sorted.bam"
 
 	awk 'NR % 4 == 0' $sum_file | awk '{print $2}' | grep -Eo '[+-]?[0-9]+([.][0-9]+)?' >> $uniq
 	awk 'NR % 5 == 0' $sum_file | awk '{print $2}' | grep -Eo '[+-]?[0-9]+([.][0-9]+)?' >> $repeat
@@ -246,7 +246,7 @@ ln -s ../mapping/*.bam.bai .
 			else
 
 #			macs2 callpeak --treatment $treatment --control $input --nomodel --broad --broad-cutoff=0.01 --format BAM --gsize mm -n $out
-			macs2 callpeak --treatment $treatment --control $input --nomodel --broad --broad --format BAM --gsize mm -n $out
+			macs2 callpeak --treatment $treatment --control $input --nomodel --broad --format BAM --gsize mm -n $out
 		fi
 
 		done
@@ -516,6 +516,7 @@ mv $out_plot ../
 #########################################################################################
 
 # DOWNSAMPLING BASED ON SAMPLE WITH THE LESS NUMBER OF READS
+
 	tput setaf 1; tput bold; echo "                   "
 	tput setaf 1; tput bold; echo "                   "
 	tput setaf 1; tput bold; echo "-------------------"
