@@ -284,10 +284,118 @@ pdf("Feature plot cluster_0 Markers 6_10.pdf", width=20, height=30)
 FeaturePlot(Lgr5Cre_MERGED, features = c("Slc12a2", "Cd74", "Clca3b", "Pdgfa"), split.by = "orig.ident", cols = c("grey" ,"blue"))
 dev.off()
 
-pdf("Feature plot cluster_0 Markers 6_10.pdf", width=20, height=30)
-FeaturePlot(Lgr5Cre_MERGED, features = c("Slc12a2", "Cd74", "Clca3b", "Pdgfa"), split.by = "orig.ident", cols = c("grey" ,"blue"))
+pdf("Feature plot cluster_1 Markers 1_5.pdf", width=20, height=30)
+FeaturePlot(Lgr5Cre_MERGED, features = c("Ube2c", "Hmgb2", "Cenpa", "Cks2", "Birc5"), split.by = "orig.ident", cols = c("grey" ,"blue"))
 dev.off()
 
+pdf("Feature plot cluster_1 Markers 6_10.pdf", width=20, height=30)
+FeaturePlot(Lgr5Cre_MERGED, features = c("H2afx", "Tubb4b", "Cenpf", "Tubb5", "Ccnb2"), split.by = "orig.ident", cols = c("grey" ,"blue"))
+dev.off()
+
+pdf("Feature plot cluster_2 Markers 1_5.pdf", width=20, height=30)
+FeaturePlot(Lgr5Cre_MERGED, features = c("Zg16", "Fcgbp", "Muc2", "Tff3", "Clca1"), split.by = "orig.ident", cols = c("grey" ,"blue"))
+dev.off()
+
+pdf("Feature plot cluster_2 Markers 6_10.pdf", width=20, height=30)
+FeaturePlot(Lgr5Cre_MERGED, features = c("Agr2", "Spink4", "Guca2a", "Ccl6", "Klk1"), split.by = "orig.ident", cols = c("grey" ,"blue"))
+dev.off()
+
+pdf("Feature plot cluster_3 Markers 1_5.pdf", width=20, height=30)
+FeaturePlot(Lgr5Cre_MERGED, features = c("Pclaf", "Stmn1", "Dut", "Lig1", "Pcna"), split.by = "orig.ident", cols = c("grey" ,"blue"))
+dev.off()
+
+pdf("Feature plot cluster_3 Markers 6_10.pdf", width=20, height=30)
+FeaturePlot(Lgr5Cre_MERGED, features = c("Tyms", "Hells", "Siva1", "Olfm4", "Dek"), split.by = "orig.ident", cols = c("grey" ,"blue"))
+dev.off()
+
+pdf("Feature plot cluster_4 Markers 1_5.pdf", width=20, height=30)
+FeaturePlot(Lgr5Cre_MERGED, features = c("Dmbt1", "Hspd1", "Hells", "Dut", "Hspe1"), split.by = "orig.ident", cols = c("grey" ,"blue"))
+dev.off()
+
+pdf("Feature plot cluster_4 Markers 6_10.pdf", width=20, height=30)
+FeaturePlot(Lgr5Cre_MERGED, features = c("C1qbp", "Snhg4", "Ranbp1", "Pcna", "Tomm5"), split.by = "orig.ident", cols = c("grey" ,"blue"))
+dev.off()
+
+pdf("Feature plot cluster_5 Markers 1_5.pdf", width=20, height=30)
+FeaturePlot(Lgr5Cre_MERGED, features = c("Ube2c", "Birc5", "Rbp7", "Dmbt1", "H2afx"), split.by = "orig.ident", cols = c("grey" ,"blue"))
+dev.off()
+
+pdf("Feature plot cluster_5 Markers 6_10.pdf", width=20, height=30)
+FeaturePlot(Lgr5Cre_MERGED, features = c("Hmgb2", "Pclaf", "Hist1h1b", "Tubb4b", "Ube2s"), split.by = "orig.ident", cols = c("grey" ,"blue"))
+dev.off()
+
+
+pdf("Feature plot cluster_6 Markers 1_5.pdf", width=20, height=30)
+FeaturePlot(Lgr5Cre_MERGED, features = c("Agr2", "Selenom", "Spink4", "Tff3", "Guca2a"), split.by = "orig.ident", cols = c("grey" ,"blue"))
+dev.off()
+
+pdf("Feature plot cluster_6 Markers 6_10.pdf", width=20, height=30)
+FeaturePlot(Lgr5Cre_MERGED, features = c("Txndc5", "Fcgbp", "Smim6", "Fxyd3", "Muc2"), split.by = "orig.ident", cols = c("grey" ,"blue"))
+dev.off()
+
+pdf("Feature plot cluster_7 Markers 1_5.pdf", width=20, height=30)
+FeaturePlot(Lgr5Cre_MERGED, features = c("Rbp2", "Arg2", "Fabp1", "Smim24", "St3gal4"), split.by = "orig.ident", cols = c("grey" ,"blue"))
+dev.off()
+
+pdf("Feature plot cluster_7 Markers 6_10.pdf", width=20, height=30)
+FeaturePlot(Lgr5Cre_MERGED, features = c("Krt19", "Dmbt1", "Gna11", "Prap1", "Gpx1"), split.by = "orig.ident", cols = c("grey" ,"blue"))
+dev.off()
+
+pdf("Feature plot cluster_8 Markers 1_5.pdf", width=20, height=30)
+FeaturePlot(Lgr5Cre_MERGED, features = c("Defa30", "Gm14851", "AY61184", "Lyz1", "Defa24"), split.by = "orig.ident", cols = c("grey" ,"blue"))
+dev.off()
+
+pdf("Feature plot cluster_8 Markers 6_10.pdf", width=20, height=30)
+FeaturePlot(Lgr5Cre_MERGED, features = c("Defa21", "Defa29", "Itln1", "Defa36", "Defa26"), split.by = "orig.ident", cols = c("grey" ,"blue"))
+dev.off()
+
+pdf("Feature plot cluster_9 Markers 1_5.pdf", width=20, height=30)
+FeaturePlot(Lgr5Cre_MERGED, features = c("Reg1", "Rbp2", "Fabp1", "Apoa1", "Gsta1"), split.by = "orig.ident", cols = c("grey" ,"blue"))
+dev.off()
+
+pdf("Feature plot cluster_9 Markers 6_10.pdf", width=20, height=30)
+FeaturePlot(Lgr5Cre_MERGED, features = c("Fabp2", "Arg2", "Gstm3", "Adh6a", "Adh6a"), split.by = "orig.ident", cols = c("grey" ,"blue"))
+dev.off()
+
+pdf("Feature plot cluster_10 Markers 1_5.pdf", width=20, height=30)
+FeaturePlot(Lgr5Cre_MERGED, features = c("Gip", "Ghrl", "Cck", "Fabp5", "Sct"), split.by = "orig.ident", cols = c("grey" ,"blue"))
+dev.off()
+
+pdf("Feature plot cluster_10 Markers 6_10.pdf", width=20, height=30)
+FeaturePlot(Lgr5Cre_MERGED, features = c("Cdkn1c", "Rbp4", "Isl1", "Myl7", "Fam183b"), split.by = "orig.ident", cols = c("grey" ,"blue"))
+dev.off()
+
+pdf("Feature plot cluster_11 Markers 1_5.pdf", width=20, height=30)
+FeaturePlot(Lgr5Cre_MERGED, features = c("Rgs13", "Alox5ap", "Lrmp", "Cd24a", "Ltc4s"), split.by = "orig.ident", cols = c("grey" ,"blue"))
+dev.off()
+
+pdf("Feature plot cluster_11 Markers 6_10.pdf", width=20, height=30)
+FeaturePlot(Lgr5Cre_MERGED, features = c("Hck", "Fyb", "Kctd12", "Dclk1", "Adh1"), split.by = "orig.ident", cols = c("grey" ,"blue"))
+dev.off()
+
+pdf("Feature plot cluster_12 Markers 1_5.pdf", width=20, height=30)
+FeaturePlot(Lgr5Cre_MERGED, features = c("Fabp6", "Reg3b", "Reg3g", "Spink1", "Clec2h"), split.by = "orig.ident", cols = c("grey" ,"blue"))
+dev.off()
+
+pdf("Feature plot cluster_12 Markers 6_10.pdf", width=20, height=30)
+FeaturePlot(Lgr5Cre_MERGED, features = c("Slc51a", "Apoa1", "Lgals3", "2200002D01Rik", "Mgatc"), split.by = "orig.ident", cols = c("grey" ,"blue"))
+dev.off()
+
+pdf("Feature plot cluster_13 Markers 1_5.pdf", width=20, height=30)
+FeaturePlot(Lgr5Cre_MERGED, features = c("Chgb", "Chga", "Tac1", "Reg4", "Vim"), split.by = "orig.ident", cols = c("grey" ,"blue"))
+dev.off()
+
+pdf("Feature plot cluster_13 Markers 6_10.pdf", width=20, height=30)
+FeaturePlot(Lgr5Cre_MERGED, features = c("Tph1", "Gstt1", "Sct", "Pcsk1", "Hmgn3"), split.by = "orig.ident", cols = c("grey" ,"blue"))
+dev.off()
+
+pdf("Feature plot cluster_14 Markers 1_5.pdf", width=20, height=30)
+FeaturePlot(Lgr5Cre_MERGED, features = c("Ccl5", "Gzma", "Cd3g", "Cd7", "Nkg7"), split.by = "orig.ident", cols = c("grey" ,"blue"))
+dev.off()
+
+pdf("Feature plot cluster_14 Markers 6_10.pdf", width=20, height=30)
+FeaturePlot(Lgr5Cre_MERGED, features = c("Cd52", "Fcer1g", "AW112010", "Trbc2", "Tyrobp"), split.by = "orig.ident", cols = c("grey" ,"blue"))
+dev.off()
 
 ##################################################################################################################################################################################################################
 
@@ -457,13 +565,96 @@ plots <- VlnPlot(Lgr5Cre_MERGED, features = c(""), split.by = "orig.ident", pt.s
 wrap_plots(plots = plots, ncol = 1)
 dev.off()
 
+############################ For cluster 0
+
 pdf("Violin Plot_Olfm4.pdf", width=15, height=10)
-VlnPlot(Lgr5Cre_MERGED_Renamed, features = c("Olfm4"), split.by = "orig.ident")
+VlnPlot(Lgr5Cre_MERGED, features = c("Olfm4"), split.by = "orig.ident")
 dev.off()
 
-pdf("Violin Plot_GFP.pdf", width=15, height=10)
-VlnPlot(Lgr5Cre_MERGED_Renamed, features = c("GFP"), split.by = "orig.ident")
+pdf("Violin Plot_Gkn3.pdf", width=15, height=10)
+VlnPlot(Lgr5Cre_MERGED, features = c("Gkn3"), split.by = "orig.ident")
 dev.off()
+
+pdf("Violin Plot_Ifitm3.pdf", width=15, height=10)
+VlnPlot(Lgr5Cre_MERGED, features = c("Ifitm3"), split.by = "orig.ident")
+dev.off()
+
+pdf("Violin Plot_Jaml.pdf", width=15, height=10)
+VlnPlot(Lgr5Cre_MERGED, features = c("Jaml"), split.by = "orig.ident")
+dev.off()
+
+pdf("Violin Plot_2410006H16Rik.pdf", width=15, height=10)
+VlnPlot(Lgr5Cre_MERGED, features = c("2410006H16Rik"), split.by = "orig.ident")
+dev.off()
+
+pdf("Violin Plot_Slc12a2.pdf", width=15, height=10)
+VlnPlot(Lgr5Cre_MERGED, features = c("Slc12a2"), split.by = "orig.ident")
+dev.off()
+
+pdf("Violin Plot_Cd74.pdf", width=15, height=10)
+VlnPlot(Lgr5Cre_MERGED, features = c("Cd74"), split.by = "orig.ident")
+dev.off()
+
+pdf("Violin Plot_Clca3b.pdf", width=15, height=10)
+VlnPlot(Lgr5Cre_MERGED, features = c("Clca3b"), split.by = "orig.ident")
+dev.off()
+
+pdf("Violin Plot_Pdgfa.pdf", width=15, height=10)
+VlnPlot(Lgr5Cre_MERGED, features = c("Pdgfa"), split.by = "orig.ident")
+dev.off()
+
+pdf("Violin Plot_Gas5.pdf", width=15, height=10)
+VlnPlot(Lgr5Cre_MERGED, features = c("Gas5"), split.by = "orig.ident")
+dev.off()
+
+############################  For Cluster 3
+
+pdf("Violin Plot_Pclaf.pdf", width=15, height=10)
+VlnPlot(Lgr5Cre_MERGED, features = c("Pclaf"), split.by = "orig.ident")
+dev.off()
+
+pdf("Violin Plot_Stmn1.pdf", width=15, height=10)
+VlnPlot(Lgr5Cre_MERGED, features = c("Stmn1"), split.by = "orig.ident")
+dev.off()
+
+pdf("Violin Plot_Dut.pdf", width=15, height=10)
+VlnPlot(Lgr5Cre_MERGED, features = c("Dut"), split.by = "orig.ident")
+dev.off()
+
+pdf("Violin Plot_Lig1.pdf", width=15, height=10)
+VlnPlot(Lgr5Cre_MERGED, features = c("Lig1"), split.by = "orig.ident")
+dev.off()
+
+pdf("Violin Plot_Pcna.pdf", width=15, height=10)
+VlnPlot(Lgr5Cre_MERGED, features = c("Pcna"), split.by = "orig.ident")
+dev.off()
+
+pdf("Violin Plot_Tyms.pdf", width=15, height=10)
+VlnPlot(Lgr5Cre_MERGED, features = c("Tyms"), split.by = "orig.ident")
+dev.off()
+
+pdf("Violin Plot_Hells.pdf", width=15, height=10)
+VlnPlot(Lgr5Cre_MERGED, features = c("Hells"), split.by = "orig.ident")
+dev.off()
+
+pdf("Violin Plot_Siva1.pdf", width=15, height=10)
+VlnPlot(Lgr5Cre_MERGED, features = c("Siva1"), split.by = "orig.ident")
+dev.off()
+
+pdf("Violin Plot_Olfm4.pdf", width=15, height=10)
+VlnPlot(Lgr5Cre_MERGED, features = c("Olfm4"), split.by = "orig.ident")
+dev.off()
+
+pdf("Violin Plot_Dek.pdf", width=15, height=10)
+VlnPlot(Lgr5Cre_MERGED, features = c("Dek"), split.by = "orig.ident")
+dev.off()
+
+
+
+
+
+
+# Split Ridge plots per markers
 
 pdf("RidgePlot_Olfm4.pdf", width=15, height=10)
 RidgePlot(Lgr5Cre_MERGED_Renamed, features = c("Olfm4"), ncol = 2)
