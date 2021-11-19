@@ -56,7 +56,7 @@ fastqc *.gz
 #	MAPPING
 
 	tput setaf 2; tput bold; echo "START MAPPING"
-	tput setaf 88; tput bold; echo "SET PATH TO REFERENCE GENOME"
+	tput setaf 88; tput bold; echo "SET PATH TO REFERENCE GENOME. e.g (/media/dimbo/10T/data/talianidis_data/Genomes/mm10/hisat_index/mm10) "
 	tput setaf 2; tput bold; echo "                 "
 	read genome
 
