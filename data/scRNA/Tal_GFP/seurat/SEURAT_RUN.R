@@ -397,6 +397,11 @@ pdf("Feature plot cluster_14 Markers 6_10.pdf", width=20, height=30)
 FeaturePlot(Lgr5Cre_MERGED, features = c("Cd52", "Fcer1g", "AW112010", "Trbc2", "Tyrobp"), split.by = "orig.ident", cols = c("grey" ,"blue"))
 dev.off()
 
+## Selected Markers
+pdf("Feature plot Selected Markers.pdf", width=20, height=40)
+FeaturePlot(Lgr5Cre_MERGED, features = c("Sis", "Fabp1", "Fabp6", "Muc2", "Lyz1", "Neurod1", "Avil" ), split.by = "orig.ident", cols = c("grey" ,"blue"))
+dev.off()
+
 ##################################################################################################################################################################################################################
 
 # DotPlots per Cluster
@@ -564,6 +569,37 @@ pdf("Violin Plot_Birc5.pdf", width=15, height=10)
 plots <- VlnPlot(Lgr5Cre_MERGED, features = c(""), split.by = "orig.ident", pt.size = 0, combine = FALSE)
 wrap_plots(plots = plots, ncol = 1)
 dev.off()
+
+############################ Selected Markers
+pdf("Violin Plot_Sis.pdf", width=15, height=10)
+VlnPlot(Lgr5Cre_MERGED, features = c("Sis"), split.by = "orig.ident")
+dev.off()
+
+pdf("Violin Plot_Fabp1.pdf", width=15, height=10)
+VlnPlot(Lgr5Cre_MERGED, features = c("Fabp1"), split.by = "orig.ident")
+dev.off()
+
+pdf("Violin Plot_Fabp6.pdf", width=15, height=10)
+VlnPlot(Lgr5Cre_MERGED, features = c("Fabp6"), split.by = "orig.ident")
+dev.off()
+
+pdf("Violin Plot_Muc2.pdf", width=15, height=10)
+VlnPlot(Lgr5Cre_MERGED, features = c("Muc2"), split.by = "orig.ident")
+dev.off()
+
+pdf("Violin Plot_Lyz1.pdf", width=15, height=10)
+VlnPlot(Lgr5Cre_MERGED, features = c("Lyz1"), split.by = "orig.ident")
+dev.off()
+
+pdf("Violin Plot_Neurod1.pdf", width=15, height=10)
+VlnPlot(Lgr5Cre_MERGED, features = c("Neurod1"), split.by = "orig.ident")
+dev.off()
+
+pdf("Violin Plot_Avil.pdf", width=15, height=10)
+VlnPlot(Lgr5Cre_MERGED, features = c("Avil"), split.by = "orig.ident")
+dev.off()
+
+
 
 ############################ For cluster 0
 
