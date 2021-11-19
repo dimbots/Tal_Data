@@ -14,9 +14,9 @@
 for ((x = $1; x <= $2; x++))
 
 do
-	sample_fastq="0${x}.fastq.gz"
-	sample_trimmed="0${x}.T.fastq.gz"
-	fastq="0${x}.fastq.gz"
+	sample_fastq="${x}.fastq.gz"
+	sample_trimmed="${x}.T.fastq.gz"
+	fastq="${x}.fastq.gz"
 
 	fastqc $sample_fastq
 
@@ -73,13 +73,13 @@ fastqc *.gz
 for ((x = $1; x <= $2; x++))
 
 do
-	sample="0${x}.testing"
-	summary="summary_0${x}.txt"
-	fastq_input="0${x}.T.fastq.gz"
-	input_sam="0${x}.sam"
-	output_bam_tmp="0${x}.bam.tmp"
-	output_bam="0${x}.bam"
-	output_sorted_bam="0${x}.sorted.bam"
+	sample="${x}.testing"
+	summary="summary_${x}.txt"
+	fastq_input="${x}.T.fastq.gz"
+	input_sam="${x}.sam"
+	output_bam_tmp="${x}.bam.tmp"
+	output_bam="${x}.bam"
+	output_sorted_bam="${x}.sorted.bam"
 
 	tput setaf 3; tput bold; echo "processing sample $fastq_input"
 
@@ -107,12 +107,12 @@ done
 for ((x = $1; x <= $2; x++))
 
 do
-        sample="0${x}.testing"
-        summary="summary_0${x}.txt"
-        fastq_input="0${x}.T.fastq.gz"
-        input_sam="0${x}.sam"
-        unsorted_bam="0${x}.unsorted.bam.tmp"
-        sorted_bam="0${x}.bam"
+        sample="${x}.testing"
+        summary="summary_${x}.txt"
+        fastq_input="${x}.T.fastq.gz"
+        input_sam="${x}.sam"
+        unsorted_bam="${x}.unsorted.bam.tmp"
+        sorted_bam="${x}.bam"
 
 	tput setaf 3; tput bold; echo "processing sample $fastq_input"
 
@@ -152,13 +152,13 @@ mv *.bam *.bai *.txt mapping/
 for ((x = $1; x <= $2; x++))
 
 do
-	sum_file="summary_0${x}.txt"
+	sum_file="summary_${x}.txt"
 
 	uniq="uniq.tmp"
 	repeat="repeat.tmp"
 	uniq_repeat="uniq_repeat.tsv"
 	identifier="identifier.tsv"
-	id="0${x}.sorted.bam"
+	id="${x}.sorted.bam"
 
 	awk 'NR % 4 == 0' $sum_file | awk '{print $2}' | grep -Eo '[+-]?[0-9]+([.][0-9]+)?' >> $uniq
 	awk 'NR % 5 == 0' $sum_file | awk '{print $2}' | grep -Eo '[+-]?[0-9]+([.][0-9]+)?' >> $repeat
@@ -205,7 +205,7 @@ cd ../
 # samtools merge Set8KO_TCP_input.merged.bam Set8KO_TCP_A_input.bam Set8KO_TCP_B_input.bam
 
 	tput setaf 6; tput bold; echo "---------------------------------------------------------------------------------------------------------------"
-	tput setaf 2; tput bold; echo "                BAR PLOT FOR MAPPING RESULST COMPLETE!plot mapped results finished!                            "
+	tput setaf 2; tput bold; echo "                             CREATED BAR PLOTS FROM MAPPING RESULTS!                                           "
 	tput setaf 6; tput bold; echo "---------------------------------------------------------------------------------------------------------------"
 	tput setaf 2; tput bold; echo " "
 
