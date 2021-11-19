@@ -22,7 +22,7 @@ do
 
 	zcat $fastq | echo $((`wc -l`/4)) >> read_count.tmp
 
-	tput setaf 2; tput bold; echo "Trimming - $sample_fastq.gz"
+	tput setaf 3; tput bold; echo "Trimming - $sample_fastq.gz"
 
 	TrimmomaticSE -threads 8 $sample_fastq $sample_trimmed SLIDINGWINDOW:4:18 LEADING:28 TRAILING:28 MINLEN:36 >> log_Trimming 2>&1
 	paste info.tsv read_count.tmp > fastq_info.tsv
@@ -56,14 +56,14 @@ fastqc *.gz
 #	MAPPING
 
 	tput setaf 2; tput bold; echo "START MAPPING"
-	tput setaf 88; tput bold; echo "SET PATH TO REFERENCE GENOME. e.g (/media/dimbo/10T/data/talianidis_data/Genomes/mm10/hisat_index/mm10) "
+	tput setaf 6; tput bold; echo "SET PATH TO REFERENCE GENOME. e.g (/media/dimbo/10T/data/talianidis_data/Genomes/mm10/hisat_index/mm10) "
 	tput setaf 2; tput bold; echo "                 "
 	read genome
 
 	mkdir mapping
 	ln -s trimmed/* .
 
-	tput setaf 88; tput bold; echo "SELECT MAPPING TOOL. TYPE (BOWTIE2 OR HISAT2)"
+	tput setaf 6; tput bold; echo "SELECT MAPPING TOOL. TYPE (BOWTIE2 OR HISAT2)"
 	tput setaf 2; tput bold; echo " "
 	read tool
 
@@ -81,7 +81,7 @@ do
 	output_bam="0${x}.bam"
 	output_sorted_bam="0${x}.sorted.bam"
 
-	tput setaf 2; tput bold; echo "processing sample $fastq_input"
+	tput setaf 3; tput bold; echo "processing sample $fastq_input"
 
 # mapping Hisat2
 hisat2 --threads 8 --summary-file $summary -x $genome -U $fastq_input -S $input_sam
@@ -114,6 +114,8 @@ do
         unsorted_bam="0${x}.unsorted.bam.tmp"
         sorted_bam="0${x}.bam"
 
+	tput setaf 3; tput bold; echo "processing sample $fastq_input"
+
 # mapping bowite2
 bowtie2 -p 8 --sensitive-local -x $genome -U $fastq_input -S $input_sam >> $summary 2>&1
 
@@ -138,7 +140,7 @@ done
 
 mv *.bam *.bai *.txt mapping/
 
-	tput setaf 2; tput bold; echo "MAPPING COMPLETE"
+	tput setaf 3; tput bold; echo "MAPPING COMPLETE"
 
 #############################################################################################################################################
 
@@ -235,13 +237,13 @@ ln -s ../mapping/*.bam.bai .
 
 		do
 
-		tput setaf 88; tput bold; echo "TYPE TREATMENT BAM FILE. else type [none]"
+		tput setaf 6; tput bold; echo "TYPE TREATMENT BAM FILE. else type [none]"
 		read treatment
 
-		tput setaf 88; tput bold; echo "TYPE INPUT BAM FILE. else type [none]"
+		tput setaf 6; tput bold; echo "TYPE INPUT BAM FILE. else type [none]"
 		read input
 
-		tput setaf 88; tput bold; echo "TYPE OUT PEAKS FILE. FORMAT:``condition_rep_A.`` else type [none]"
+		tput setaf 6; tput bold; echo "TYPE OUT PEAKS FILE. FORMAT:``condition_rep_A.`` else type [none]"
 		read out
 
 			if	[[ $treatment = "none" ]]
@@ -268,13 +270,13 @@ ln -s ../mapping/*.bam.bai .
 		tput setaf 2; tput bold; echo "MERGE PEAKS FROM REPLICATE A AND B"
 		tput setaf 6; tput bold; echo "----------------------------------"
 
-		tput setaf 88; tput bold; echo "type peaks from replicate A. else type [none]"
+		tput setaf 6; tput bold; echo "type peaks from replicate A. else type [none]"
 		read repA
 
-		tput setaf 88; tput bold; echo "type peaks from replicate B. else type [none]"
+		tput setaf 6; tput bold; echo "type peaks from replicate B. else type [none]"
 		read repB
 
-		tput setaf 88; tput bold; echo "type overlapped peaks out file. Format: [overlapped_condition]. else type [none]"
+		tput setaf 6; tput bold; echo "type overlapped peaks out file. Format: [overlapped_condition]. else type [none]"
 		read out_file
 
 			if      [[ $repA = "none" ]]
@@ -290,7 +292,7 @@ ln -s ../mapping/*.bam.bai .
 
 	final_peaks="$out_file.bed"
 
-	tput setaf 88; tput bold; echo "set path to blacklist_regions. else type [none]"
+	tput setaf 6; tput bold; echo "set path to blacklist_regions. else type [none]"
 	read blacklist
 
 	bedtools intersect -v -a $out_file -b $blacklist > $final_peaks
@@ -323,7 +325,7 @@ ln -s ../mapping/*.bam.bai .
 	ln -s ../mapping/*.bam .
 	ln -s ../mapping/*.bam.bai .
 
-	tput setaf 88; tput bold; echo "RENAME FILES FROM 0869... TO CONDITIONS (e.g Set8KO_A_input.) IN DIRECTORY (qc_metrics). WHEN COMPLETE TYPE [done]."
+	tput setaf 6; tput bold; echo "RENAME FILES FROM 0869... TO CONDITIONS (e.g Set8KO_A_input.) IN DIRECTORY (qc_metrics). WHEN COMPLETE TYPE [done]."
 	tput setaf 2; tput bold; echo " "
 	read response
 
@@ -352,7 +354,7 @@ plotFingerprint -b *.bam -p 7 -plot finger_print_all.png
 	tput setaf 6; tput bold; echo "--------------------------------------------------------------------------"
 	tput setaf 2; tput bold; echo " "
 
-	tput setaf 88; tput bold; echo "TYPE METHOD OF NORMALIZATION. RPKM / BPM / RPGC"
+	tput setaf 6; tput bold; echo "TYPE METHOD OF NORMALIZATION. RPKM / BPM / RPGC"
 	tput setaf 2; tput bold; echo " "
 	read method
 
@@ -415,25 +417,25 @@ mv *.bw normalization/
 	tput setaf 2; tput bold; echo "   TYPE BIGWIG FILES (TREATMENT-INPUT)"
 	tput setaf 6; tput bold; echo "-----------------------------------------"
 
-	tput setaf 88; tput bold; echo "TYPE TREATMENT BW FILE. ELSE TYPE [none]"
+	tput setaf 6; tput bold; echo "TYPE TREATMENT BW FILE. ELSE TYPE [none]"
 	read bw1
-	tput setaf 88; tput bold; echo "TYPE INPUT BW FILE. ELSE TYPE [none]"
+	tput setaf 6; tput bold; echo "TYPE INPUT BW FILE. ELSE TYPE [none]"
 	read bw2
-	tput setaf 88; tput bold; echo "TYPE TREATMENT BW FILE. ELSE TYPE [none]"
+	tput setaf 6; tput bold; echo "TYPE TREATMENT BW FILE. ELSE TYPE [none]"
 	read bw3
-	tput setaf 88; tput bold; echo "TYPE INPUT BW FILE. ELSE TYPE [none]"
+	tput setaf 6; tput bold; echo "TYPE INPUT BW FILE. ELSE TYPE [none]"
 	read bw4
-	tput setaf 88; tput bold; echo "TYPE OUT MATRIX FILE. E.G (matrix.0865_0866)"
+	tput setaf 6; tput bold; echo "TYPE OUT MATRIX FILE. E.G (matrix.0865_0866)"
 	read out_matrix
-	tput setaf 88; tput bold; echo "TYPE OUT REGIONG FILE. E.G (out_regions.0865_0866)"
+	tput setaf 6; tput bold; echo "TYPE OUT REGIONG FILE. E.G (out_regions.0865_0866)"
 	read out_regions
 
-	tput setaf 88; tput bold; echo "Set path to genes.bed file"
+	tput setaf 6; tput bold; echo "Set path to genes.bed file"
 	read genes
 
-	tput setaf 88; tput bold; echo "TYPE NUMBER OF BASE PAIRS BEFORE TSS"
+	tput setaf 6; tput bold; echo "TYPE NUMBER OF BASE PAIRS BEFORE TSS"
 	read before_tss
-	tput setaf 88; tput bold; echo "TYPE NUMBER OF BASE PAIRS AFTER TSS"
+	tput setaf 6; tput bold; echo "TYPE NUMBER OF BASE PAIRS AFTER TSS"
 	read after_tss
 	tput setaf 2; tput bold; echo " "
 	
@@ -487,9 +489,9 @@ mv $out_plot ../
 	mkdir annotation
 	cd annotation/
 
-	tput setaf 88; tput bold; echo "SET PATH TO REFERENCE GENOME"
+	tput setaf 6; tput bold; echo "SET PATH TO REFERENCE GENOME"
 	read ref_genome
-	tput setaf 88; tput bold; echo "SET PATH TO GENES.GTF FILE"
+	tput setaf 6; tput bold; echo "SET PATH TO GENES.GTF FILE"
 	read genes_gtf
 	tput setaf 2; tput bold; echo " "
 
@@ -499,9 +501,9 @@ mv $out_plot ../
 
 		do
 
-	tput setaf 88; tput bold; echo "TYPE PEAKS.BED FILES ELSE TYPE [none]"
+	tput setaf 6; tput bold; echo "TYPE PEAKS.BED FILES ELSE TYPE [none]"
 	read PEAKS
-	tput setaf 88; tput bold; echo "TYPE ANNOATED FILE E.G(annotations_Set8Ko.tsv) ELSE TYPE [none]"
+	tput setaf 6; tput bold; echo "TYPE ANNOATED FILE E.G(annotations_Set8Ko.tsv) ELSE TYPE [none]"
 	read out_annotation
 	tput setaf 2; tput bold; echo " "
 
@@ -590,11 +592,12 @@ done
 
 #!/bin/bash
 
-tput setaf 6; tput bold; echo "                     "
-tput setaf 6; tput bold; echo "                     "
-tput setaf 6; tput bold; echo "                     "
+tput setaf 2; tput bold; echo "                     "
+tput setaf 2; tput bold; echo "                     "
+tput setaf 2; tput bold; echo "                     "
 
-tput setaf 88; tput bold; echo "INITIATE SUPER ENHANCER ANALYSIS? TYPE Y or N"
+tput setaf 6; tput bold; echo "INITIATE SUPER ENHANCER ANALYSIS? TYPE Y or N"
+tput setaf 2; tput bold; echo "                     "
 
 	read SE
 
@@ -613,7 +616,7 @@ tput setaf 88; tput bold; echo "INITIATE SUPER ENHANCER ANALYSIS? TYPE Y or N"
 	ln -s ../peak_calling/merged_peaks/*.bed .
 	ln -s ../mapping/*.bam .
 
-	tput setaf 88; tput bold; echo "RENAME BAM FILES WHEN FINISH TYPE OK"
+	tput setaf 6; tput bold; echo "RENAME BAM FILES WHEN FINISH TYPE OK"
 	read resp
 
 # MERGE BAM FILES
@@ -622,13 +625,13 @@ tput setaf 88; tput bold; echo "INITIATE SUPER ENHANCER ANALYSIS? TYPE Y or N"
 
 		do
 
-		tput setaf 88; tput bold; echo "TYPE MERGED BAM FILE. E.G Set8Ko_merged.bam.  WHEN FINISHED TYPE none"
+		tput setaf 6; tput bold; echo "TYPE MERGED BAM FILE. E.G Set8Ko_merged.bam.  WHEN FINISHED TYPE none"
 		read merged
-		tput setaf 88; tput bold; echo "TYPE REPLICATE A BAM FILE. WHEN FINISHED TYPE none"
+		tput setaf 6; tput bold; echo "TYPE REPLICATE A BAM FILE. WHEN FINISHED TYPE none"
 		read rep_A
-		tput setaf 88; tput bold; echo "TYPE REPLICATE B BAM FILE. WHEN FINISHED TYPE none"
+		tput setaf 6; tput bold; echo "TYPE REPLICATE B BAM FILE. WHEN FINISHED TYPE none"
 		read rep_B
-		tput setaf 88; tput bold; echo " "
+		tput setaf 2; tput bold; echo " "
 
 		if	[[ $merged = "none" ]]
 			then
@@ -646,7 +649,7 @@ tput setaf 88; tput bold; echo "INITIATE SUPER ENHANCER ANALYSIS? TYPE Y or N"
 
 		do
 
-		tput setaf 88; tput bold; echo "TYPE PEAKS BED FILE. ELSE TYPE none"
+		tput setaf 6; tput bold; echo "TYPE PEAKS BED FILE. ELSE TYPE none"
 		tput setaf 2; tput bold; echo " "
 		read peaks_bed
 
@@ -676,16 +679,16 @@ tput setaf 88; tput bold; echo "INITIATE SUPER ENHANCER ANALYSIS? TYPE Y or N"
 
 	do
 
-	tput setaf 88; tput bold; echo "TYPE GFF FILE. ELSE TYPE none"
+	tput setaf 6; tput bold; echo "TYPE GFF FILE. ELSE TYPE none"
 	read merged_gff
 
-	tput setaf 88; tput bold; echo "TYPE MERGED TREATMENT BAM FILE. ELSE TYPE none"
+	tput setaf 6; tput bold; echo "TYPE MERGED TREATMENT BAM FILE. ELSE TYPE none"
 	read treatment_merged_bam
 
-	tput setaf 88; tput bold; echo "TYPE MERGED INPUT BAM FILE. ELSE TYPE none"
+	tput setaf 6; tput bold; echo "TYPE MERGED INPUT BAM FILE. ELSE TYPE none"
 	read input_merged_bam
 
-	tput setaf 88; tput bold; echo "SE OUT FILE. ELSE TYPE none"
+	tput setaf 6; tput bold; echo "SE OUT FILE. ELSE TYPE none"
 	tput setaf 2; tput bold; echo " "
 	read out
 
