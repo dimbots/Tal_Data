@@ -6,23 +6,30 @@
 #############################################################################################################################################
 
 	tput setaf 6; tput bold; echo "			"
-	tput setaf 2; tput bold; echo "INITIATE PIPELINE"
-	tput setaf 2; tput bold; echo "                 "
+	tput setaf 1; tput bold; echo "INITIATE PIPELINE"
+	tput setaf 2; tput bold; echo " "
+
+	tput setaf 3; tput bold; echo "-----------------------------------"
+	tput setaf 3; tput bold; echo "Start Quality Base Check & Trimming"
+	tput setaf 3; tput bold; echo "-----------------------------------"
+	tput setaf 2; tput bold; echo " "
+
 
 #	QUALITY BASE CHECK - TRIMMING
 
 for ((x = $1; x <= $2; x++))
 
 do
-	sample_fastq="${x}.fastq.gz"
-	sample_trimmed="${x}.T.fastq.gz"
-	fastq="${x}.fastq.gz"
+	sample_fastq="0${x}.fastq.gz"
+	sample_trimmed="0${x}.T.fastq.gz"
+	fastq="0${x}.fastq.gz"
 
 	fastqc $sample_fastq
 
 	zcat $fastq | echo $((`wc -l`/4)) >> read_count.tmp
 
-	tput setaf 3; tput bold; echo "Trimming - $sample_fastq.gz"
+	tput setaf 3; tput bold; echo "Trimming - $sample_fastq"
+	tput setaf 2; tput bold; echo " "
 
 	TrimmomaticSE -threads 8 $sample_fastq $sample_trimmed SLIDINGWINDOW:4:18 LEADING:28 TRAILING:28 MINLEN:36 >> log_Trimming 2>&1
 	paste info.tsv read_count.tmp > fastq_info.tsv
@@ -32,6 +39,7 @@ done
 	wait
 
 #	Write number of reads in info_table
+
 paste info.tsv read_count.tmp > fastq_info.table.tsv
 rm read_count.tmp
 rm info.tsv
@@ -55,33 +63,36 @@ fastqc *.gz
 
 #	MAPPING
 
-	tput setaf 2; tput bold; echo "START MAPPING"
-	tput setaf 6; tput bold; echo "SET PATH TO REFERENCE GENOME. e.g (/media/dimbo/10T/data/talianidis_data/Genomes/mm10/hisat_index/mm10) "
-	tput setaf 2; tput bold; echo "                 "
+	tput setaf 3; tput bold; echo "Start Mapping"
+	tput setaf 6; tput bold; echo "Set path to reference genome. e.g (/media/dimbo/10T/data/talianidis_data/genomes/mm10/hisat_index/mm10) "
+	tput setaf 2; tput bold; echo " "
 	read genome
 
 	mkdir mapping
 	ln -s trimmed/* .
 
-	tput setaf 6; tput bold; echo "SELECT MAPPING TOOL. TYPE (BOWTIE2 OR HISAT2)"
+	tput setaf 6; tput bold; echo "Select alignment software. Type -> [BOWTIE2 OR HISAT2]"
 	tput setaf 2; tput bold; echo " "
 	read tool
 
 	if [[ $tool = "HISAT2" ]]
 		then
 
+	tput setaf 2; tput bold; echo "Initiate Alignment With HISAT2"
+
 for ((x = $1; x <= $2; x++))
 
 do
-	sample="${x}.testing"
-	summary="summary_${x}.txt"
-	fastq_input="${x}.T.fastq.gz"
-	input_sam="${x}.sam"
-	output_bam_tmp="${x}.bam.tmp"
-	output_bam="${x}.bam"
-	output_sorted_bam="${x}.sorted.bam"
+	sample="0${x}.testing"
+	summary="summary_0${x}.txt"
+	fastq_input="0${x}.T.fastq.gz"
+	input_sam="0${x}.sam"
+	output_bam_tmp="0${x}.bam.tmp"
+	output_bam="0${x}.bam"
+	output_sorted_bam="0${x}.sorted.bam"
 
 	tput setaf 3; tput bold; echo "processing sample $fastq_input"
+	tput setaf 2; tput bold; echo " "
 
 # mapping Hisat2
 hisat2 --threads 8 --summary-file $summary -x $genome -U $fastq_input -S $input_sam
@@ -104,23 +115,26 @@ rm $input_sam $output_bam.tmp $output_bam
 done
 	else
 
+	tput setaf 2; tput bold; echo "Initiate Alignment With BOWTIE2"
+
 for ((x = $1; x <= $2; x++))
 
 do
-        sample="${x}.testing"
-        summary="summary_${x}.txt"
-        fastq_input="${x}.T.fastq.gz"
-        input_sam="${x}.sam"
-        unsorted_bam="${x}.unsorted.bam.tmp"
-        sorted_bam="${x}.bam"
+        sample="0${x}.testing"
+        summary="summary_0${x}.txt"
+        fastq_input="0${x}.T.fastq.gz"
+        input_sam="0${x}.sam"
+        unsorted_bam="0${x}.unsorted.bam.tmp"
+        sorted_bam="0${x}.bam"
 
 	tput setaf 3; tput bold; echo "processing sample $fastq_input"
+	tput setaf 2; tput bold; echo " "
 
 # mapping bowite2
 bowtie2 -p 8 --sensitive-local -x $genome -U $fastq_input -S $input_sam >> $summary 2>&1
 
 # filter reads
-samtools view -h -S -b -q 20 -o $unsorted_bam $input_sam
+samtools view -h -S -b -q 30 -o $unsorted_bam $input_sam
 
 # sort bam
 samtools sort -t 8 -o $sorted_bam $unsorted_bam
@@ -138,9 +152,11 @@ done
 
 	wait
 
-mv *.bam *.bai *.txt mapping/
+	mv *.bam *.bai *.txt mapping/
 
-	tput setaf 3; tput bold; echo "MAPPING COMPLETE"
+	tput setaf 2; tput bold; echo " "
+	tput setaf 3; tput bold; echo "Alignment To Reference Genome Complete!"
+	tput setaf 2; tput bold; echo " "
 
 #############################################################################################################################################
 
@@ -152,13 +168,13 @@ mv *.bam *.bai *.txt mapping/
 for ((x = $1; x <= $2; x++))
 
 do
-	sum_file="summary_${x}.txt"
+	sum_file="summary_0${x}.txt"
 
 	uniq="uniq.tmp"
 	repeat="repeat.tmp"
 	uniq_repeat="uniq_repeat.tsv"
 	identifier="identifier.tsv"
-	id="${x}.sorted.bam"
+	id="0${x}.sorted.bam"
 
 	awk 'NR % 4 == 0' $sum_file | awk '{print $2}' | grep -Eo '[+-]?[0-9]+([.][0-9]+)?' >> $uniq
 	awk 'NR % 5 == 0' $sum_file | awk '{print $2}' | grep -Eo '[+-]?[0-9]+([.][0-9]+)?' >> $repeat
@@ -184,7 +200,7 @@ done
 
 #	Write R script for barplots and save it to file
 
-	echo	"setwd(\"$working_directory\") 
+	echo	"setwd(\"$working_directory\")
 		 colors = c(\"paleturquoise3\",\"red4\")
 		 names = scan(\"identifier.tsv\", character(), quote = \"\")
 		 values = scan(\"uniq_repeat.tsv\")
@@ -199,14 +215,14 @@ done
 	rm final_IDS.tsv identifier* uniq_repeat.tsv
 
 #	SET DIR FASTQ
-cd ../
+	cd ../
 
 # Merge bam files (replicate 1 & 2) Treatment and control
 # samtools merge Set8KO_TCP_input.merged.bam Set8KO_TCP_A_input.bam Set8KO_TCP_B_input.bam
 
-	tput setaf 6; tput bold; echo "---------------------------------------------------------------------------------------------------------------"
-	tput setaf 2; tput bold; echo "                             CREATED BAR PLOTS FROM MAPPING RESULTS!                                           "
-	tput setaf 6; tput bold; echo "---------------------------------------------------------------------------------------------------------------"
+	tput setaf 3; tput bold; echo "---------------------------------------------------------------------------------------------------------------"
+	tput setaf 3; tput bold; echo "                                 Bar Plots For Alignment Rates Created!                                        "
+	tput setaf 3; tput bold; echo "---------------------------------------------------------------------------------------------------------------"
 	tput setaf 2; tput bold; echo " "
 
 #############################################################################################################################################
@@ -215,35 +231,31 @@ cd ../
 
 #############################################################################################################################################
 
-	tput setaf 6; tput bold; echo "---------------------------------------------------------------------------------------------------------------"
-	tput setaf 2; tput bold; echo "                                  INITIATE PEAK CALLING ANALYSIS                                               "
-	tput setaf 6; tput bold; echo "---------------------------------------------------------------------------------------------------------------"
+	tput setaf 3; tput bold; echo "---------------------------------------------------------------------------------------------------------------"
+	tput setaf 3; tput bold; echo "                               Initiate Peak Calling Analysis with MACS2!                                      "
+	tput setaf 3; tput bold; echo "---------------------------------------------------------------------------------------------------------------"
 	tput setaf 2; tput bold; echo " "
 
-mkdir peak_calling
+	mkdir peak_calling
 
 #	SET DIR PEAK_CALLING
-cd peak_calling/
-ln -s /media/dimbo/10T/data/talianidis_data/genomes/mm10/genes_info/mm10-blacklist.v2.bed .
-ln -s ../mapping/*.bam .
-ln -s ../mapping/*.bam.bai .
+	cd peak_calling/
 
-	tput setaf 6; tput bold; echo "--------------------------------------------------------------------------------------------------------"
-	tput setaf 2; tput bold; echo "                                      CALL PEAKS USING MACS2                                            "
-	tput setaf 6; tput bold; echo "--------------------------------------------------------------------------------------------------------"
-	tput setaf 2; tput bold; echo " "
+	ln -s ../mapping/*.bam .
+	ln -s ../mapping/*.bam.bai .
 
 		while [[ $treatment != "none" ]]
 
 		do
 
-		tput setaf 6; tput bold; echo "TYPE TREATMENT BAM FILE. else type [none]"
+		tput setaf 6; tput bold; echo "Type treatment bam file. else type [none]"
 		read treatment
 
-		tput setaf 6; tput bold; echo "TYPE INPUT BAM FILE. else type [none]"
+		tput setaf 6; tput bold; echo "Type input bam file. else type [none]"
 		read input
 
-		tput setaf 6; tput bold; echo "TYPE OUT PEAKS FILE. FORMAT:``condition_rep_A.`` else type [none]"
+		tput setaf 6; tput bold; echo "Type peak call out file. Format: [condition_rep_A]. else type [none]"
+		tput setaf 2; tput bold; echo " "
 		read out
 
 			if	[[ $treatment = "none" ]]
@@ -266,17 +278,18 @@ ln -s ../mapping/*.bam.bai .
 
 		do
 
-		tput setaf 6; tput bold; echo "----------------------------------"
-		tput setaf 2; tput bold; echo "MERGE PEAKS FROM REPLICATE A AND B"
-		tput setaf 6; tput bold; echo "----------------------------------"
+		tput setaf 3; tput bold; echo "----------------------------------"
+		tput setaf 3; tput bold; echo "Merge Peaks From Replicate A and B"
+		tput setaf 3; tput bold; echo "----------------------------------"
 
-		tput setaf 6; tput bold; echo "type peaks from replicate A. else type [none]"
+		tput setaf 6; tput bold; echo "type peaks out file from replicate A. else type [none]"
 		read repA
 
-		tput setaf 6; tput bold; echo "type peaks from replicate B. else type [none]"
+		tput setaf 6; tput bold; echo "type peaks out file from replicate B. else type [none]"
 		read repB
 
 		tput setaf 6; tput bold; echo "type overlapped peaks out file. Format: [overlapped_condition]. else type [none]"
+		tput setaf 2; tput bold; echo " "
 		read out_file
 
 			if      [[ $repA = "none" ]]
@@ -293,6 +306,7 @@ ln -s ../mapping/*.bam.bai .
 	final_peaks="$out_file.bed"
 
 	tput setaf 6; tput bold; echo "set path to blacklist_regions. else type [none]"
+	tput setaf 2; tput bold; echo " "
 	read blacklist
 
 	bedtools intersect -v -a $out_file -b $blacklist > $final_peaks
@@ -311,9 +325,9 @@ ln -s ../mapping/*.bam.bai .
 
 ####################################################################################################################
 
-		tput setaf 6; tput bold; echo "--------------------------------------------------------------------"
-		tput setaf 2; tput bold; echo "                   INITIATE QC METRICS ANALYSIS                     "
-		tput setaf 6; tput bold; echo "--------------------------------------------------------------------"
+		tput setaf 3; tput bold; echo "--------------------------------------------------------------------"
+		tput setaf 3; tput bold; echo "                   Initiate QC Metrics Analysis                     "
+		tput setaf 3; tput bold; echo "--------------------------------------------------------------------"
 		tput setaf 2; tput bold; echo " "
 
 #	START IN FASTQ DIRECTORY
@@ -325,21 +339,32 @@ ln -s ../mapping/*.bam.bai .
 	ln -s ../mapping/*.bam .
 	ln -s ../mapping/*.bam.bai .
 
-	tput setaf 6; tput bold; echo "RENAME FILES FROM 0869... TO CONDITIONS (e.g Set8KO_A_input.) IN DIRECTORY (qc_metrics). WHEN COMPLETE TYPE [done]."
+	tput setaf 6; tput bold; echo "In directory (qc_metrics) rename files from (0869.sorted.bam) to (Set8KOA_Input)"
+	tput setaf 6; tput bold; echo "Type [done] when renaming of files is complete."
 	tput setaf 2; tput bold; echo " "
 	read response
 
 # CREATE MULTIBAM FILE
-multiBamSummary bins --bamfiles *.bam -p 7 -o multiBam.npz
 
-# PLOT HEATMAP
-plotCorrelation -in multiBam.npz --corMethod spearman --colorMap Blues --plotHeight 11.5 --plotWidth 13  --whatToPlot heatmap --plotNumbers -o SpearmanCor_readCounts.png
+	renamed_files=$(ls --ignore=*.bai)
+
+multiBamSummary bins --bamfiles $renamed_files -p 8 -o multiBam.npz
+
+# PLOT SPEARMAN AND PEARSON CORRELATION
+plotCorrelation -in multiBam.npz --corMethod spearman --removeOutliers --skipZeros --colorMap Blues --plotHeight 11.5 --plotWidth 13  --whatToPlot heatmap --plotNumbers -o SpearmanCor_readCounts_plot.png
+plotCorrelation -in multiBam.npz --corMethod pearson --removeOutliers  --skipZeros --colorMap Blues --plotHeight 11.5 --plotWidth 13  --whatToPlot heatmap --plotNumbers -o PearsonCor_readCounts_plot.png
 
 # PLOT READ COVERAGE
-plotCoverage --bamfiles *.bam --skipZeros -p 7 --verbose -o Coverage_plot.png
+plotCoverage --bamfiles $renamed_files --skipZeros -p 8 --verbose -o Coverage_plot.png
 
 # PLOT FINGERPRINT
-plotFingerprint -b *.bam -p 7 -plot finger_print_all.png
+plotFingerprint -b $renamed_files -p 8 -plot FingerPrint_plot.png
+
+# PLOT PCA
+plotPCA -in multiBam.npz -o PCA_readCounts.png -T "PCA of read counts"
+
+	tput setaf 3; tput bold; echo "QC Metrics Complete!"
+	tput setaf 2; tput bold; echo " "
 
 #########################################################################################
 
@@ -347,14 +372,12 @@ plotFingerprint -b *.bam -p 7 -plot finger_print_all.png
 
 #	CONVERT BAM TO BIGWIG (NORMALIZATION)
 
-
-
-	tput setaf 6; tput bold; echo "--------------------------------------------------------------------------"
-	tput setaf 2; tput bold; echo "				START NORMALIZATION				"
-	tput setaf 6; tput bold; echo "--------------------------------------------------------------------------"
+	tput setaf 3; tput bold; echo "--------------------------------------------------------------------------"
+	tput setaf 3; tput bold; echo "			       Normalize Bam Files!				 "
+	tput setaf 3; tput bold; echo "--------------------------------------------------------------------------"
 	tput setaf 2; tput bold; echo " "
 
-	tput setaf 6; tput bold; echo "TYPE METHOD OF NORMALIZATION. RPKM / BPM / RPGC"
+	tput setaf 3; tput bold; echo "Type Method of Normalization. [RPKM or BPM or RPGC]"
 	tput setaf 2; tput bold; echo " "
 	read method
 
@@ -362,11 +385,11 @@ plotFingerprint -b *.bam -p 7 -plot finger_print_all.png
 	[[ $method = "BPM" ]]
 			then
 
-			for i in $(ls *.bam)
+			for i in $(ls -I "*.bai" -I "*.npz" -I "*.png")
 
 			do
 				bw="$i.bw"
-				bamCoverage --bam $i -o $bw --binSize 10 --outFileFormat bigwig --normalizeUsing BPM -p 7 --extendReads 200
+				bamCoverage --bam $i -o $bw --binSize 10 --outFileFormat bigwig --normalizeUsing BPM -p 8 --extendReads 200
 			done
 	fi
 
@@ -376,12 +399,12 @@ plotFingerprint -b *.bam -p 7 -plot finger_print_all.png
 
 		[[ $method = "RPKM" ]]
 		then
-			for i in $(ls *.bam)
+			for i in $(ls -I "*.bai" -I "*.npz" -I "*.png")
 
 			do
 
 			bw="$i.bw"
-			bamCoverage --bam $i -o $bw --binSize 10 --outFileFormat bigwig --normalizeUsing RPKM -p 7 --extendReads 200
+			bamCoverage --bam $i -o $bw --binSize 10 --outFileFormat bigwig --normalizeUsing RPKM -p 8 --extendReads 200
 
 			done
 		fi
@@ -392,17 +415,22 @@ plotFingerprint -b *.bam -p 7 -plot finger_print_all.png
 	[[ $method = "RPGC" ]]
 	then
 
-		for i in $(ls *.bam)
+		for i in $(ls -I "*.bai" -I "*.npz" -I "*.png")
 
 		do
 		bw="$i.bw"
-		bamCoverage --bam $i -o $bw --binSize 10 --outFileFormat bigwig --normalizeUsing RPGC -p 7 --effectiveGenomeSize 2407883318 --extendReads 200
+		bamCoverage --bam $i -o $bw --binSize 10 --outFileFormat bigwig --normalizeUsing RPGC -p 8 --effectiveGenomeSize 2407883318 --extendReads 200
 
 		done
 	fi
 
-mkdir normalization
-mv *.bw normalization/
+	mkdir normalization
+	mv *.bw normalization/
+
+	tput setaf 2; tput bold; echo " "
+	tput setaf 3; tput bold; echo "Normalization Comlete!"
+	tput setaf 2; tput bold; echo " "
+
 
 #########################################################################################
 
@@ -411,70 +439,107 @@ mv *.bw normalization/
 #	SET DIR NORMALIZATION
 	cd normalization/
 
-	tput setaf 2; tput bold; echo "          START COMPUTEMATRIX            "
+	tput setaf 3; tput bold; echo "          Start ComputeMatrix            "
+	tput setaf 3; tput bold; echo " "
+	tput setaf 3; tput bold; echo "            Create Heatmaps              "
+	tput setaf 3; tput bold; echo " "
 
-	tput setaf 6; tput bold; echo "-----------------------------------------"
-	tput setaf 2; tput bold; echo "   TYPE BIGWIG FILES (TREATMENT-INPUT)"
-	tput setaf 6; tput bold; echo "-----------------------------------------"
+	while [[ $num_samples != "none" ]]
 
-	tput setaf 6; tput bold; echo "TYPE TREATMENT BW FILE. ELSE TYPE [none]"
-	read bw1
-	tput setaf 6; tput bold; echo "TYPE INPUT BW FILE. ELSE TYPE [none]"
-	read bw2
-	tput setaf 6; tput bold; echo "TYPE TREATMENT BW FILE. ELSE TYPE [none]"
-	read bw3
-	tput setaf 6; tput bold; echo "TYPE INPUT BW FILE. ELSE TYPE [none]"
-	read bw4
-	tput setaf 6; tput bold; echo "TYPE OUT MATRIX FILE. E.G (matrix.0865_0866)"
-	read out_matrix
-	tput setaf 6; tput bold; echo "TYPE OUT REGIONG FILE. E.G (out_regions.0865_0866)"
-	read out_regions
+		do
 
-	tput setaf 6; tput bold; echo "Set path to genes.bed file"
-	read genes
-
-	tput setaf 6; tput bold; echo "TYPE NUMBER OF BASE PAIRS BEFORE TSS"
-	read before_tss
-	tput setaf 6; tput bold; echo "TYPE NUMBER OF BASE PAIRS AFTER TSS"
-	read after_tss
+	tput setaf 6; tput bold; echo "Type how many samples to run [2 or 4]. When finished type [none]"
+	read num_samples
 	tput setaf 2; tput bold; echo " "
-	
-	if [[ "$bw3" != "none" && "bw4" != "none" ]]
+
+	if      [[ $num_samples = "none" ]]
 		then
-		tput setaf 2; tput bold; echo "RUNNING WITH 4 SAMPLES"
-		computeMatrix reference-point -b $before_tss -a $after_tss -R $genes -S $bw1 $bw2 $bw3 $bw4 --skipZeros -o $out_matrix --outFileSortedRegions $out_regions -p 7
-
-#		tput setaf 2; tput bold; echo "TYPE SAMPLE LABELS TO BE SHOWN IN PLOT"
-#		tput setaf 2; tput bold; echo "                                      "
-
-#		tput setaf 2; tput bold; echo "TREATMENT SAMPLE 1. (IN QUOTES)"
-#		read tr1
-#		tput setaf 2; tput bold; echo "INPUT SAMPLE 1. (IN QUOTES)"
-#		read in1
-#		tput setaf 2; tput bold; echo "TREATMENT SAMPLE 2. (IN QUOTES)"
-#		read tr2
-#		tput setaf 2; tput bold; echo "INPUT SAMPLE 2. (IN QUOTES)"
-#		read in2
-
-		out_plot="Heatmap_$out_matrix"
-		plotHeatmap -m $out_matrix -out $out_plot --colorMap Blues
+		break
 	else
-		tput setaf 2; tput bold; echo "RUNNING WITH 2 SAMPLES"
-		computeMatrix reference-point -b $before_tss -a $after_tss -R $genes -S $bw1 $bw2 --skipZeros -o $out_matrix --outFileSortedRegions $out_regions -p 7
+		if
+		[[ $num_samples = "4" ]]
+		then
 
-#		tput setaf 2; tput bold; echo "TYPE SAMPLE LABELS TO BE SHOWN IN QUOTES"
-#		tput setaf 2; tput bold; echo "                                        "
+		echo "Run compute matrix with 4 samples!"
 
-#		tput setaf 2; tput bold; echo "TREATMENT SAMPLE 1. (IN QUOTES)"
-#		read tr1
-#		tput setaf 2; tput bold; echo "INPUT SAMPLE 1. (IN QUOTES)"
-#		read in1
+	# RUN WITH 4 SAMPLES
+	tput setaf 6; tput bold; echo "Type treatment bw file for replicate A"
+	read bw1
+	tput setaf 6; tput bold; echo "Type input bw file for replicate A"
+	read bw2
+	tput setaf 6; tput bold; echo "Type treatment bw file for replicate B"
+	read bw3
+	tput setaf 6; tput bold; echo "Type input bw file for replicate B"
+	read bw4
+	tput setaf 6; tput bold; echo "Type matrix out file. e.g (matrix_Set8KO)"
+	read out_matrix
+	tput setaf 6; tput bold; echo "Type regions out file. e.g (out_regions_Set8KO)"
+	read out_regions
+	tput setaf 6; tput bold; echo "Set path to genes.bed file. e.g (/media/dimbo/10T/data/talianidis_data/Genomes/mm10/genes_info/mm10_GENES_GENCODE.VM23.bed)"
+	read genes
+	tput setaf 6; tput bold; echo "Type number of base pairs before Transcription Start Site"
+	read before_tss
+	tput setaf 6; tput bold; echo "Type number of base pairs after Transcription End Site"
+	read after_tss
+	tput setaf 6; tput bold; echo "Type number of base pairs for Region Body Length"
+	read region_body
+	tput setaf 2; tput bold; echo " "
+
+	# Scale regions
+	computeMatrix scale-regions --startLabel "TSS" --endLabel "TES" -b $before_tss -a $after_tss --regionBodyLength $region_body -R $genes -S $bw1 $bw2 $bw3 $bw4 --smartLabels --skipZeros -o $out_matrix --outFileSortedRegions $out_regions -p 8
+
+	# Reference point
+#	computeMatrix reference-point -b $before_tss -a $after_tss -R $genes -S $bw1 $bw2 $bw3 $bw4 --skipZeros --smartLabels -o $out_matrix --outFileSortedRegions $out_regions -p 8
 
 		out_plot="Heatmap_$out_matrix"
-		plotHeatmap -m $out_matrix -out $out_plot --colorMap Blues
+		plotHeatmap -m $out_matrix -out $out_plot --colorMap Blues --boxAroundHeatmaps no --missingDataColor 1
+
+		out_profile_plot="ProfilePlot_$out_matrix"
+		plotProfile -m $out_matrix -out $out_profile_plot --colors blue blue
+
+		else
+
+		echo "Run compute matrix with 2 samples!"
+
+	# RUN WITH 2 SAMPLES
+	tput setaf 6; tput bold; echo "Type treatment bw file"
+        read bw1
+        tput setaf 6; tput bold; echo "Type input bw file"
+	read bw2
+	tput setaf 6; tput bold; echo "Type matrix out file. e.g (matrix_Set8KOA)"
+	read out_matrix
+	tput setaf 6; tput bold; echo "Type regions out file. e.g (out_regions_Set8KOA)"
+	read out_regions
+	tput setaf 6; tput bold; echo "Set path to genes.bed file. e.g (/media/dimbo/10T/data/talianidis_data/Genomes/mm10/genes_info/mm10_GENES_GENCODE.VM23.bed)"
+	read genes
+	tput setaf 6; tput bold; echo "Type number of base pairs before Transcription Start Site"
+	read before_tss
+	tput setaf 6; tput bold; echo "Type number of base pairs after Transcription End Site"
+	read after_tss
+	tput setaf 6; tput bold; echo "Type number of base pairs for Region Body Length"
+	read region_body
+	tput setaf 2; tput bold; echo " "
+
+	# Scale regions
+	computeMatrix scale-regions --startLabel "TSS" --endLabel "TES" -b $before_tss -a $after_tss --regionBodyLength $region_body -R $genes -S $bw1 $bw2 --smartLabels --skipZeros -o $out_matrix --outFileSortedRegions $out_regions -p 8
+
+	# Reference point
+#	computeMatrix reference-point -b $before_tss -a $after_tss -R $genes -S $bw1 $bw2 --skipZeros --smartLabels -o $out_matrix --outFileSortedRegions $out_regions -p 8
+
+		out_plot="Heatmap_$out_matrix"
+		plotHeatmap -m $out_matrix -out $out_plot --colorMap Blues --boxAroundHeatmaps no --missingDataColor 1
+
+		out_profile_plot="ProfilePlot_$out_matrix"
+		plotProfile -m $out_matrix -out $out_profile_plot --colors blue blue
+
+		fi
+
 	fi
 
+	done
+
 mv $out_plot ../
+
 
 
 #########################################################################################
@@ -517,18 +582,18 @@ mv $out_plot ../
 	done
 
 
-	tput setaf 6; tput bold; echo "-------------------"
-	tput setaf 2; tput bold; echo "ANNOTATION COMPLETE"
-	tput setaf 6; tput bold; echo "-------------------"
+	tput setaf 3; tput bold; echo "-------------------"
+	tput setaf 3; tput bold; echo "ANNOTATION COMPLETE"
+	tput setaf 3; tput bold; echo "-------------------"
 	tput setaf 2; tput bold; echo " "
 
 #########################################################################################
 
 # DOWNSAMPLING BASED ON SAMPLE WITH THE LESS NUMBER OF READS
 
-	tput setaf 6; tput bold; echo "-------------------"
-	tput setaf 2; tput bold; echo "START DOWNSAMPLING "
-	tput setaf 6; tput bold; echo "-------------------"
+	tput setaf 3; tput bold; echo "-------------------"
+	tput setaf 3; tput bold; echo "START DOWNSAMPLING "
+	tput setaf 3; tput bold; echo "-------------------"
 	tput setaf 2; tput bold; echo " "
 
 # SET DIR TO FASTQ
