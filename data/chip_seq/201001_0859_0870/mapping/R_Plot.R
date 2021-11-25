@@ -1,0 +1,8 @@
+setwd("/media/dimbo/10T/data/talianidis_data/ChIP_Seq/201001_0859_0870/fastq/mapping") 
+		 colors = c("deepskyblue4","gainsboro")
+		 names = scan("identifier.tsv", character(), quote = "")
+		 values = scan("uniq_repeat.tsv")
+		 values = matrix(values, nrow = 2, ncol = 12, byrow = TRUE)
+		 pdf(file = "/media/dimbo/10T/data/talianidis_data/ChIP_Seq/201001_0859_0870/fastq/mapping/plot.pdf", width = 7, height = 7)
+		 barplot(values, names.arg = names, ylab = "Alignment % Rate ", col = colors, density = 300, ylim = c(0,100) ,cex.lab = 1.4, las=3, cex.names = 1)
+		 dev.off()
