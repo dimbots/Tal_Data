@@ -130,23 +130,25 @@ do
 	tput setaf 2; tput bold; echo " "
 
 # mapping bowite2
-bowtie2 -p 8 --sensitive-local -x $genome -U $fastq_input -S $input_sam >> $summary 2>&1
+bowtie2 -p 8 --local -x $genome -U $fastq_input -S $input_sam >> $summary 2>&1
 
-# filter reads
-samtools view -h -S -b -q 30 -o $unsorted_bam $input_sam
+# convert sam to bam
+samtools view -@ 8 -h -S -b -o $unsorted_bam $input_sam
 
-# sort bam
-samtools sort -t 8 -o $sorted_bam $unsorted_bam
+# sort bam file
+sambamba sort -t 8 -o $sorted_bam $unsorted_bam
+
+# filter bam
+sambamba view -h -t 8 -f bam -F "[XS] == null and not unmapped  and not duplicate" $sorted_bam > $filtered_bam
 
 # index
-samtools index $sorted_bam
+samtools index $filtered_bam
 
 # remove tmp files
 rm $input_sam
 rm *.tmp
 
 done
-
 	fi
 
 	wait
@@ -467,7 +469,7 @@ plotPCA -in multiBam.npz -o PCA_readCounts.png -T "PCA of read counts"
 	read out_matrix
 	tput setaf 6; tput bold; echo "Type regions out file. e.g (out_regions_Set8KO)"
 	read out_regions
-	tput setaf 6; tput bold; echo "Set path to genes.bed file. e.g (/media/dimbo/10T/data/talianidis_data/genomes/mm10/genes_info/mm10_GENES_GENCODE.VM23.bed)"
+	tput setaf 6; tput bold; echo "Set path to genes.gtf file. e.g (/media/dimbo/10T/data/talianidis_data/genomes/mm10/genes_info/mm10.ncbiRefSeq.gtf)"
 	read genes
 	tput setaf 6; tput bold; echo "Type number of base pairs before Transcription Start Site"
 	read before_tss
@@ -502,7 +504,7 @@ plotPCA -in multiBam.npz -o PCA_readCounts.png -T "PCA of read counts"
 	read out_matrix
 	tput setaf 6; tput bold; echo "Type regions out file. e.g (out_regions_Set8KOA)"
 	read out_regions
-	tput setaf 6; tput bold; echo "Set path to genes.bed file. e.g (/media/dimbo/10T/data/talianidis_data/genomes/mm10/genes_info/mm10_GENES_GENCODE.VM23.bed)"
+	tput setaf 6; tput bold; echo "Set path to genes.gtf file. e.g (/media/dimbo/10T/data/talianidis_data/genomes/mm10/genes_info/mm10.ncbiRefSeq.gtf)"
 	read genes
 	tput setaf 6; tput bold; echo "Type number of base pairs before Transcription Start Site"
 	read before_tss
@@ -556,7 +558,7 @@ mv *.png ../
 
 	tput setaf 6; tput bold; echo "Set path to reference genome fasta file. e.g (/media/dimbo/10T/data/talianidis_data/genomes/mm10/genes_info/mm10.fa)"
 	read genome_homer
-	tput setaf 6; tput bold; echo "Type path to genes.gtf file. e.g (/media/dimbo/10T/data/talianidis_data/genomes/mm10/genes_info/mm10_GENES_GENCODE.VM23.gtf)"
+	tput setaf 6; tput bold; echo "Type path to genes.gtf file. e.g (/media/dimbo/10T/data/talianidis_data/genomes/mm10/genes_info/mm10.ncbiRefSeq.gtf)"
 	read genes_gtf
 	tput setaf 2; tput bold; echo " "
 
