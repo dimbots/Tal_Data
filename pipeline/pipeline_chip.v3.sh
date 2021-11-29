@@ -486,7 +486,7 @@ plotPCA -in multiBam.npz -o PCA_readCounts.png -T "PCA of read counts"
 #	computeMatrix reference-point -b $before_tss -a $after_tss -R $genes -S $bw1 $bw2 $bw3 $bw4 --skipZeros --smartLabels -o $out_matrix --outFileSortedRegions $out_regions -p 8
 
 		out_plot="Heatmap_$out_matrix"
-		plotHeatmap -m $out_matrix -out $out_plot --colorMap Blues --boxAroundHeatmaps no --missingDataColor 1 --heatmapWidth 6
+		plotHeatmap -m $out_matrix -out $out_plot --colorMap Blues --boxAroundHeatmaps no --missingDataColor 1
 
 		out_profile_plot="ProfilePlot_$out_matrix"
 		plotProfile -m $out_matrix -out $out_profile_plot --colors blue blue
@@ -521,7 +521,7 @@ plotPCA -in multiBam.npz -o PCA_readCounts.png -T "PCA of read counts"
 #	computeMatrix reference-point -b $before_tss -a $after_tss -R $genes -S $bw1 $bw2 --skipZeros --smartLabels -o $out_matrix --outFileSortedRegions $out_regions -p 8
 
 		out_plot="Heatmap_$out_matrix"
-		plotHeatmap -m $out_matrix -out $out_plot --colorMap Blues --boxAroundHeatmaps no --missingDataColor 1 --heatmapWidth 6
+		plotHeatmap -m $out_matrix -out $out_plot --colorMap Blues --boxAroundHeatmaps no --missingDataColor 1
 
 		out_profile_plot="ProfilePlot_$out_matrix"
 		plotProfile -m $out_matrix -out $out_profile_plot --colors blue blue
