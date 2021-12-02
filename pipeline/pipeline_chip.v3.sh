@@ -19,9 +19,9 @@
 for ((x = $1; x <= $2; x++))
 
 do
-	sample_fastq="0${x}.fastq.gz"
-	sample_trimmed="0${x}.T.fastq.gz"
-	fastq="0${x}.fastq.gz"
+	sample_fastq="${x}.fastq.gz"
+	sample_trimmed="${x}.T.fastq.gz"
+	fastq="${x}.fastq.gz"
 
 	fastqc $sample_fastq
 
@@ -82,19 +82,19 @@ fastqc *.gz
 for ((x = $1; x <= $2; x++))
 
 do
-	sample="0${x}.testing"
-	summary="summary_0${x}.txt"
-	fastq_input="0${x}.T.fastq.gz"
-	input_sam="0${x}.sam"
-	output_bam_tmp="0${x}.bam.tmp"
-	output_bam="0${x}.bam"
-	output_sorted_bam="0${x}.sorted.bam"
+	sample="${x}.testing"
+	summary="summary_${x}.txt"
+	fastq_input="${x}.T.fastq.gz"
+	input_sam="${x}.sam"
+	output_bam_tmp="${x}.bam.tmp"
+	output_bam="${x}.bam"
+	output_sorted_bam="${x}.sorted.bam"
 
 	tput setaf 3; tput bold; echo "processing sample $fastq_input"
 	tput setaf 2; tput bold; echo " "
 
 # mapping Hisat2
-hisat2 --threads 8 --summary-file $summary -x $genome -U $fastq_input -S $input_sam
+hisat2 --threads 8 --no-spliced-alignment --summary-file $summary -x $genome -U $fastq_input -S $input_sam
 
 # keep only unique
 samtools view -@ 8 -h -F 4 $input_sam | awk 'substr($1, 0, 1)=="@" || $0 !~ /ZS:/' | samtools view -h -b > $output_bam_tmp
@@ -119,12 +119,12 @@ done
 for ((x = $1; x <= $2; x++))
 
 do
-        sample="0${x}.testing"
-        summary="summary_0${x}.txt"
-        fastq_input="0${x}.T.fastq.gz"
-        input_sam="0${x}.sam"
-        unsorted_bam="0${x}.unsorted.bam.tmp"
-        sorted_bam="0${x}.bam"
+        sample="${x}.testing"
+        summary="summary_${x}.txt"
+        fastq_input="${x}.T.fastq.gz"
+        input_sam="${x}.sam"
+        unsorted_bam="${x}.unsorted.bam.tmp"
+        sorted_bam="${x}.bam"
 
 	tput setaf 3; tput bold; echo "processing sample $fastq_input"
 	tput setaf 2; tput bold; echo " "
@@ -169,13 +169,13 @@ done
 for ((x = $1; x <= $2; x++))
 
 do
-	sum_file="summary_0${x}.txt"
+	sum_file="summary_${x}.txt"
 
 	uniq="uniq.tmp"
 	repeat="repeat.tmp"
 	uniq_repeat="uniq_repeat.tsv"
 	identifier="identifier.tsv"
-	id="0${x}.sorted.bam"
+	id="${x}.sorted.bam"
 
 	awk 'NR % 4 == 0' $sum_file | awk '{print $2}' | grep -Eo '[+-]?[0-9]+([.][0-9]+)?' >> $uniq
 	awk 'NR % 5 == 0' $sum_file | awk '{print $2}' | grep -Eo '[+-]?[0-9]+([.][0-9]+)?' >> $repeat
@@ -618,27 +618,27 @@ mv *.png ../
 for ((x = $1; x <= $2; x++))
 
 do
-	input="0${x}.sorted.bam"
-	header="0${x}.tmp"
+	input="${x}.sorted.bam"
+	header="${x}.tmp"
 
 	samtools view -H $input > $header
 
-	shuffled="0${x}.sam.tmp"
+	shuffled="${x}.sam.tmp"
 
 	# -n (this is the sample that has the least mapped reads. (extracted from bam file))
 	samtools view -@ 8 $input | shuf | head -n $number > $shuffled
 
-	unsorted="0${x}.downsampled.tmp"
+	unsorted="${x}.downsampled.tmp"
 
 	cat $header $shuffled > $unsorted
 
-	sorted="0${x}.downsampled.bam"
+	sorted="${x}.downsampled.bam"
 
 	samtools sort -@ 8 $unsorted -o $sorted
 
 	samtools index -@ 8 $sorted
 
-	bw="0${x}_downsampled.bw"
+	bw="${x}_downsampled.bw"
 	bamCoverage -p 8 -b $sorted -o $bw
 
 	rm $shuffled $unsorted
