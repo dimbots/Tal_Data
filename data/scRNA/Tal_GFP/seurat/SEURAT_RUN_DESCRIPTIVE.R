@@ -280,202 +280,14 @@ pdf("Feature plot cluster_0 Markers 1-5.pdf", width=20, height=30)
 FeaturePlot(Lgr5Cre_MERGED, features = c("Olfm4", "Gkn3", "Ifitm3", "Jaml", "2410006H16Rik"), split.by = "orig.ident", cols = c("grey" ,"blue"))
 dev.off()
 
-pdf("Feature plot cluster_0 Markers 6_10.pdf", width=20, height=30)
-FeaturePlot(Lgr5Cre_MERGED, features = c("Slc12a2", "Cd74", "Clca3b", "Pdgfa"), split.by = "orig.ident", cols = c("grey" ,"blue"))
-dev.off()
-
-pdf("Feature plot cluster_1 Markers 1_5.pdf", width=20, height=30)
-FeaturePlot(Lgr5Cre_MERGED, features = c("Ube2c", "Hmgb2", "Cenpa", "Cks2", "Birc5"), split.by = "orig.ident", cols = c("grey" ,"blue"))
-dev.off()
-
-pdf("Feature plot cluster_1 Markers 6_10.pdf", width=20, height=30)
-FeaturePlot(Lgr5Cre_MERGED, features = c("H2afx", "Tubb4b", "Cenpf", "Tubb5", "Ccnb2"), split.by = "orig.ident", cols = c("grey" ,"blue"))
-dev.off()
-
-pdf("Feature plot cluster_2 Markers 1_5.pdf", width=20, height=30)
-FeaturePlot(Lgr5Cre_MERGED, features = c("Zg16", "Fcgbp", "Muc2", "Tff3", "Clca1"), split.by = "orig.ident", cols = c("grey" ,"blue"))
-dev.off()
-
-pdf("Feature plot cluster_2 Markers 6_10.pdf", width=20, height=30)
-FeaturePlot(Lgr5Cre_MERGED, features = c("Agr2", "Spink4", "Guca2a", "Ccl6", "Klk1"), split.by = "orig.ident", cols = c("grey" ,"blue"))
-dev.off()
-
-pdf("Feature plot cluster_3 Markers 1_5.pdf", width=20, height=30)
-FeaturePlot(Lgr5Cre_MERGED, features = c("Pclaf", "Stmn1", "Dut", "Lig1", "Pcna"), split.by = "orig.ident", cols = c("grey" ,"blue"))
-dev.off()
-
-pdf("Feature plot cluster_3 Markers 6_10.pdf", width=20, height=30)
-FeaturePlot(Lgr5Cre_MERGED, features = c("Tyms", "Hells", "Siva1", "Olfm4", "Dek"), split.by = "orig.ident", cols = c("grey" ,"blue"))
-dev.off()
-
-pdf("Feature plot cluster_4 Markers 1_5.pdf", width=20, height=30)
-FeaturePlot(Lgr5Cre_MERGED, features = c("Dmbt1", "Hspd1", "Hells", "Dut", "Hspe1"), split.by = "orig.ident", cols = c("grey" ,"blue"))
-dev.off()
-
-pdf("Feature plot cluster_4 Markers 6_10.pdf", width=20, height=30)
-FeaturePlot(Lgr5Cre_MERGED, features = c("C1qbp", "Snhg4", "Ranbp1", "Pcna", "Tomm5"), split.by = "orig.ident", cols = c("grey" ,"blue"))
-dev.off()
-
-pdf("Feature plot cluster_5 Markers 1_5.pdf", width=20, height=30)
-FeaturePlot(Lgr5Cre_MERGED, features = c("Ube2c", "Birc5", "Rbp7", "Dmbt1", "H2afx"), split.by = "orig.ident", cols = c("grey" ,"blue"))
-dev.off()
-
-pdf("Feature plot cluster_5 Markers 6_10.pdf", width=20, height=30)
-FeaturePlot(Lgr5Cre_MERGED, features = c("Hmgb2", "Pclaf", "Hist1h1b", "Tubb4b", "Ube2s"), split.by = "orig.ident", cols = c("grey" ,"blue"))
-dev.off()
-
-
-pdf("Feature plot cluster_6 Markers 1_5.pdf", width=20, height=30)
-FeaturePlot(Lgr5Cre_MERGED, features = c("Agr2", "Selenom", "Spink4", "Tff3", "Guca2a"), split.by = "orig.ident", cols = c("grey" ,"blue"))
-dev.off()
-
-pdf("Feature plot cluster_6 Markers 6_10.pdf", width=20, height=30)
-FeaturePlot(Lgr5Cre_MERGED, features = c("Txndc5", "Fcgbp", "Smim6", "Fxyd3", "Muc2"), split.by = "orig.ident", cols = c("grey" ,"blue"))
-dev.off()
-
-pdf("Feature plot cluster_7 Markers 1_5.pdf", width=20, height=30)
-FeaturePlot(Lgr5Cre_MERGED, features = c("Rbp2", "Arg2", "Fabp1", "Smim24", "St3gal4"), split.by = "orig.ident", cols = c("grey" ,"blue"))
-dev.off()
-
-pdf("Feature plot cluster_7 Markers 6_10.pdf", width=20, height=30)
-FeaturePlot(Lgr5Cre_MERGED, features = c("Krt19", "Dmbt1", "Gna11", "Prap1", "Gpx1"), split.by = "orig.ident", cols = c("grey" ,"blue"))
-dev.off()
-
-pdf("Feature plot cluster_8 Markers 1_5.pdf", width=20, height=30)
-FeaturePlot(Lgr5Cre_MERGED, features = c("Defa30", "Gm14851", "AY61184", "Lyz1", "Defa24"), split.by = "orig.ident", cols = c("grey" ,"blue"))
-dev.off()
-
-pdf("Feature plot cluster_8 Markers 6_10.pdf", width=20, height=30)
-FeaturePlot(Lgr5Cre_MERGED, features = c("Defa21", "Defa29", "Itln1", "Defa36", "Defa26"), split.by = "orig.ident", cols = c("grey" ,"blue"))
-dev.off()
-
-pdf("Feature plot cluster_9 Markers 1_5.pdf", width=20, height=30)
-FeaturePlot(Lgr5Cre_MERGED, features = c("Reg1", "Rbp2", "Fabp1", "Apoa1", "Gsta1"), split.by = "orig.ident", cols = c("grey" ,"blue"))
-dev.off()
-
-pdf("Feature plot cluster_9 Markers 6_10.pdf", width=20, height=30)
-FeaturePlot(Lgr5Cre_MERGED, features = c("Fabp2", "Arg2", "Gstm3", "Adh6a", "Adh6a"), split.by = "orig.ident", cols = c("grey" ,"blue"))
-dev.off()
-
-pdf("Feature plot cluster_10 Markers 1_5.pdf", width=20, height=30)
-FeaturePlot(Lgr5Cre_MERGED, features = c("Gip", "Ghrl", "Cck", "Fabp5", "Sct"), split.by = "orig.ident", cols = c("grey" ,"blue"))
-dev.off()
-
-pdf("Feature plot cluster_10 Markers 6_10.pdf", width=20, height=30)
-FeaturePlot(Lgr5Cre_MERGED, features = c("Cdkn1c", "Rbp4", "Isl1", "Myl7", "Fam183b"), split.by = "orig.ident", cols = c("grey" ,"blue"))
-dev.off()
-
-pdf("Feature plot cluster_11 Markers 1_5.pdf", width=20, height=30)
-FeaturePlot(Lgr5Cre_MERGED, features = c("Rgs13", "Alox5ap", "Lrmp", "Cd24a", "Ltc4s"), split.by = "orig.ident", cols = c("grey" ,"blue"))
-dev.off()
-
-pdf("Feature plot cluster_11 Markers 6_10.pdf", width=20, height=30)
-FeaturePlot(Lgr5Cre_MERGED, features = c("Hck", "Fyb", "Kctd12", "Dclk1", "Adh1"), split.by = "orig.ident", cols = c("grey" ,"blue"))
-dev.off()
-
-pdf("Feature plot cluster_12 Markers 1_5.pdf", width=20, height=30)
-FeaturePlot(Lgr5Cre_MERGED, features = c("Fabp6", "Reg3b", "Reg3g", "Spink1", "Clec2h"), split.by = "orig.ident", cols = c("grey" ,"blue"))
-dev.off()
-
-pdf("Feature plot cluster_12 Markers 6_10.pdf", width=20, height=30)
-FeaturePlot(Lgr5Cre_MERGED, features = c("Slc51a", "Apoa1", "Lgals3", "2200002D01Rik", "Mgatc"), split.by = "orig.ident", cols = c("grey" ,"blue"))
-dev.off()
-
-pdf("Feature plot cluster_13 Markers 1_5.pdf", width=20, height=30)
-FeaturePlot(Lgr5Cre_MERGED, features = c("Chgb", "Chga", "Tac1", "Reg4", "Vim"), split.by = "orig.ident", cols = c("grey" ,"blue"))
-dev.off()
-
-pdf("Feature plot cluster_13 Markers 6_10.pdf", width=20, height=30)
-FeaturePlot(Lgr5Cre_MERGED, features = c("Tph1", "Gstt1", "Sct", "Pcsk1", "Hmgn3"), split.by = "orig.ident", cols = c("grey" ,"blue"))
-dev.off()
-
-pdf("Feature plot cluster_14 Markers 1_5.pdf", width=20, height=30)
-FeaturePlot(Lgr5Cre_MERGED, features = c("Ccl5", "Gzma", "Cd3g", "Cd7", "Nkg7"), split.by = "orig.ident", cols = c("grey" ,"blue"))
-dev.off()
-
-pdf("Feature plot cluster_14 Markers 6_10.pdf", width=20, height=30)
-FeaturePlot(Lgr5Cre_MERGED, features = c("Cd52", "Fcer1g", "AW112010", "Trbc2", "Tyrobp"), split.by = "orig.ident", cols = c("grey" ,"blue"))
-dev.off()
-
-## Selected Markers
-pdf("Feature plot Selected Markers.pdf", width=20, height=40)
-FeaturePlot(Lgr5Cre_MERGED, features = c("Sis", "Fabp1", "Fabp6", "Muc2", "Lyz1", "Neurod1", "Avil" ), split.by = "orig.ident", cols = c("grey" ,"blue"))
-dev.off()
 
 ##################################################################################################################################################################################################################
 
 # DotPlots per Cluster
 
-pdf("Enterocyte_Immature Markers.pdf", width=15, height=8)
-p =  DotPlot(Lgr5Cre_MERGED,features = c("Reg3g", "Gsdmc4", "Prss32", "Krt8"),cols = c("blue","orange"))
-p + ggtitle("Enterocyte Immature Markers") + RotatedAxis()
-dev.off()
-
 pdf("Enterocyte_Mature Markers.pdf", width=15, height=8)
 p = DotPlot(Lgr5Cre_MERGED,features = c("Elf3","Sis","Fabp1","Hnf4aos","Hnf4a", "Hnf4g", "Tmigd1","Fabp6","Slc51b","Slc51a","Mep1a","Fam151a","Naaladl1","Slc34a2","Plb1","Nudt4","Dpep1","Pmp22","Xpnpep2","Muc3","Neu1","Clec2h","Phgr1","Prss30","Aldob","Alpi","Apoa1","Apoa4","Lct"),cols = c("blue","orange")) + RotatedAxis()
 p + ggtitle("Enterocyte Mature Markers")
-dev.off()
-
-pdf("Enterocyte Progenitor Markers.pdf", width=15, height=8)
-p = DotPlot(Lgr5Cre_MERGED,features = c("Ccnb1","Cdc20","Cenpa","Cdkn3","Cdc25c","Ccnb2","Kif22","Ube2c","Sapcd2","Rbp7","Ccna2","Aurka","Cdkn2d","Kif23","Nek2","Birc5","Plk1","Tacc3","Melk","Cps1"),cols = c("blue","orange")) + RotatedAxis()
-p + ggtitle("Enterocyte Progenitor Markers")
-dev.off()
-
-pdf("Goblet Markers.pdf", width=15, height=8)
-p = DotPlot(Lgr5Cre_MERGED,features = c("Muc2","Spdef","Foxa1","Agr2","Spink4","Fcgbp","Tff3","Zg16","Clca1","Ccl6","Klk1","Tpsg1","Ccl9","Txndc5","Tspan13","Atoh1","Lrrc26","Clca3a1","Klf4"),cols = c("blue","orange")) + RotatedAxis()
-p + ggtitle("Goblet Markers")
-dev.off()
-
-pdf("Paneth Markers.pdf", width=15, height=8)
-p = DotPlot(Lgr5Cre_MERGED,features = c("Lyz1","Mmp7","Dll4","Sox9","Gfi1","Gm14851","Defa21","Defa22","Defa17","Defa24","Defa3","Mptx2","Ang4"),cols = c("blue","orange")) + RotatedAxis()
-# Gene Gm15284 & Defa-rs1 excluded as there are not in the dataset 
-p + ggtitle("Paneth Markers")
-dev.off()
-
-pdf("Enteroendocrine Markers.pdf", width=15, height=8)
-p = DotPlot(Lgr5Cre_MERGED,features = c("Gfi1","Neurog3","Neurod1","Chga","Chgb","Isl1","Arx","Pax6","Foxa2","Sst","Gck","Gcg","Tph1","Pyy","Gfra3","Cpe","Tac1","Fam183b", "Hmgn3","Cck","Fev","Gch1","Pcsk1n", "Bex2","Vwa5b2","Nkx2-2","Marcksl1","Neurod2","Insm1"),cols = c("blue","orange")) + RotatedAxis()
-# Gene Ngfrap1 excluded. It can not be found in the dataset
-p + ggtitle("Enteroendocrine Markers")
-dev.off()
-
-pdf("Stem Markers.pdf", width=15, height=8)
-p = DotPlot(Lgr5Cre_MERGED,features = c("Lgr5","Ascl2","Olfm4","Prom1","Axin2","Fzd2","Fzd7","Lrp5","Lrp6","Notch1","Hes1","Smo","Yap1","Igfbp4","Bex1","Gkn3","Slc12a2"),cols = c("blue","orange")) + RotatedAxis()
-p + ggtitle("Stem Markers")
-dev.off()
-
-pdf("Tuft Markers.pdf", width=15, height=8)
-p = DotPlot(Lgr5Cre_MERGED,features = c("Dclk1","Ptprc","Avil","Lrmp","Alox5ap","Rgs13","Sh2d6","Ltc4s","Hck","Cd24a","Trpm5","Kctd12","Aldh2","Il13ra1","Gng13","Tmem176a","Skap2","Ptpn6","Ly6g6f","Fyb","Adh1","Gfi1b","Il25"),cols = c("blue","orange")) + RotatedAxis()
-p + ggtitle("Tuft Markers")
-dev.off()
-
-pdf("TA Markers.pdf", width=15, height=8)
-p = DotPlot(Lgr5Cre_MERGED,features = c("Stmn1", "Tubb5"),cols = c("blue","orange")) + RotatedAxis()
-p + ggtitle("TA Markers")
-dev.off()
-
-pdf("Reserved Stem Markers.pdf", width=15, height=8)
-p = DotPlot(Lgr5Cre_MERGED,features = c("Lrig1", "Bmi1", "Hopx"),cols = c("blue","orange")) + RotatedAxis()
-p + ggtitle("Reserved Stem Markers")
-dev.off()
-
-pdf("Necroptosis Markers.pdf", width=15, height=8)
-p = DotPlot(Lgr5Cre_MERGED,features = c("Zbp1", "Ripk1", "Ripk3", "Cxcl1", "Ccl20", "Tnf", "Csf1" ),cols = c("blue","orange")) + RotatedAxis()
-p + ggtitle("Necroptosis Markers")
-dev.off()
-
-pdf("Lgr5 Marker.pdf", width=15, height=8)
-p = DotPlot(Lgr5Cre_MERGED,features = c("Lgr5" ),cols = c("blue","orange")) + RotatedAxis()
-p + ggtitle("Lgr5 Marker")
-dev.off()
-
-pdf("GFP Marker.pdf", width=15, height=8)
-p = DotPlot(Lgr5Cre_MERGED,features = c("GFP" ), cols = c("blue","orange")) + RotatedAxis()
-p + ggtitle("GFP Marker")
-dev.off()
-
-pdf("Nature paper Markers.pdf", width=15, height=8)
-p = DotPlot(Lgr5Cre_MERGED,features = c("Mbl2","Ptprs","C4bp","Icam1","Ptpn22","Syk","Shmt2","Zfp809","Trim35","Bst2","Ltf","Mx1","Pml","Trim6","Adar","Mx2","S100a14","Gbp3","Ifitm3","Rnf135","Tmem173","Isg20","Jak3","Stat2","Oas2","Aim2","Oas1b","Dhx58","Oas1a","Eif2ak2","Zc3hav1","Ereg","Parp14","Zbp1","Cxcl16","Oasl2","Ddx58","Trim25","Rnf125","Vnn1","Pvr","Gbp4","Gbp10","Oasl1","Gbp8","Trim15","Cd55","Oas3","Isg15","Irf7","Trim12c","Ifit2","Ifit3","Trim30a","Nos2"), cols = c("blue","orange")) + RotatedAxis()
-p + ggtitle("Nature Paper Markers")
 dev.off()
 
 ##################################################################################################################################################################################################################
@@ -485,73 +297,6 @@ dev.off()
 pdf("Enterocyte Immature Markers Grouped.pdf", width=15, height=8)
 p =  DotPlot(Lgr5Cre_MERGED,features = c("Reg3g", "Gsdmc4", "Prss32", "Krt8"), group.by = "orig.ident" ,cols = c("blue","orange"))
 p + ggtitle("Enterocyte Immature Markers") + RotatedAxis()
-dev.off()
-
-pdf("Enterocyte Mature Markers Grouped.pdf", width=15, height=8)
-p = DotPlot(Lgr5Cre_MERGED,features = c("Elf3","Sis","Fabp1","Hnf4aos","Hnf4a", "Hnf4g", "Tmigd1","Fabp6","Slc51b","Slc51a","Mep1a","Fam151a","Naaladl1","Slc34a2","Plb1","Nudt4","Dpep1","Pmp22","Xpnpep2","Muc3","Neu1","Clec2h","Phgr1","Prss30","Aldob","Alpi","Apoa1","Apoa4","Lct"), group.by = "orig.ident" ,cols = c("blue","orange")) + RotatedAxis()
-p + ggtitle("Enterocyte Mature Markers")
-dev.off()
-
-pdf("Enterocyte Progenitor Markers Grouped.pdf", width=15, height=8)
-p = DotPlot(Lgr5Cre_MERGED,features = c("Ccnb1","Cdc20","Cenpa","Cdkn3","Cdc25c","Ccnb2","Kif22","Ube2c","Sapcd2","Rbp7","Ccna2","Aurka","Cdkn2d","Kif23","Nek2","Birc5","Plk1","Tacc3","Melk","Cps1"), group.by = "orig.ident", cols = c("blue","orange")) + RotatedAxis()
-p + ggtitle("Enterocyte Progenitor Markers")
-dev.off()
-
-pdf("Goblet Markers Grouped.pdf", width=15, height=8)
-p = DotPlot(Lgr5Cre_MERGED,features = c("Muc2","Spdef","Foxa1","Agr2","Spink4","Fcgbp","Tff3","Zg16","Clca1","Ccl6","Klk1","Tpsg1","Ccl9","Txndc5","Tspan13","Atoh1","Lrrc26","Clca3a1","Klf4"), group.by = "orig.ident",  cols = c("blue","orange")) + RotatedAxis()
-p + ggtitle("Goblet Markers")
-dev.off()
-
-pdf("Paneth Markers Grouped.pdf", width=15, height=8)
-p = DotPlot(Lgr5Cre_MERGED,features = c("Lyz1","Mmp7","Dll4","Sox9","Gfi1","Gm14851","Defa21","Defa22","Defa17","Defa24","Defa3","Mptx2","Ang4"), group.by = "orig.ident", group.by = "orig.ident", cols = c("blue","orange")) + RotatedAxis()
-# Gene Gm15284 & Defa-rs1 excluded as there are not in the dataset 
-p + ggtitle("Paneth Markers")
-dev.off()
-
-pdf("Enteroendocrine Markers Grouped.pdf", width=15, height=8)
-p = DotPlot(Lgr5Cre_MERGED,features = c("Gfi1","Neurog3","Neurod1","Chga","Chgb","Isl1","Arx","Pax6","Foxa2","Sst","Gck","Gcg","Tph1","Pyy","Gfra3","Cpe","Tac1","Fam183b", "Hmgn3","Cck","Fev","Gch1","Pcsk1n", "Bex2","Vwa5b2","Nkx2-2","Marcksl1","Neurod2","Insm1"),group.by = "orig.ident",  cols = c("blue","orange")) + RotatedAxis()
-# Gene Ngfrap1 excluded. It can not be found in the dataset
-p + ggtitle("Enteroendocrine Markers")
-dev.off()
-
-pdf("Stem Markers Grouped.pdf", width=15, height=8)
-p = DotPlot(Lgr5Cre_MERGED,features = c("Lgr5","Ascl2","Olfm4","Prom1","Axin2","Fzd2","Fzd7","Lrp5","Lrp6","Notch1","Hes1","Smo","Yap1","Igfbp4","Bex1","Gkn3","Slc12a2"), group.by = "orig.ident", cols = c("blue","orange")) + RotatedAxis()
-p + ggtitle("Stem Markers")
-dev.off()
-
-pdf("Tuft Markers Grouped.pdf", width=15, height=8)
-p = DotPlot(Lgr5Cre_MERGED,features = c("Dclk1","Ptprc","Avil","Lrmp","Alox5ap","Rgs13","Sh2d6","Ltc4s","Hck","Cd24a","Trpm5","Kctd12","Aldh2","Il13ra1","Gng13","Tmem176a","Skap2","Ptpn6","Ly6g6f","Fyb","Adh1","Gfi1b","Il25"), group.by = "orig.ident", cols = c("blue","orange")) + RotatedAxis()
-p + ggtitle("Tuft Markers")
-dev.off()
-
-pdf("TA Markers Grouped.pdf", width=15, height=8)
-p = DotPlot(Lgr5Cre_MERGED,features = c("Stmn1", "Tubb5"),group.by = "orig.ident", cols = c("blue","orange")) + RotatedAxis()
-p + ggtitle("TA Markers")
-dev.off()
-
-pdf("Reserved Stem Markers Grouped.pdf", width=15, height=8)
-p = DotPlot(Lgr5Cre_MERGED,features = c("Lrig1", "Bmi1", "Hopx"),group.by = "orig.ident", cols = c("blue","orange")) + RotatedAxis()
-p + ggtitle("Reserved Stem Markers")
-dev.off()
-
-pdf("Necroptosis Markers Grouped.pdf", width=15, height=8)
-p = DotPlot(Lgr5Cre_MERGED,features = c("Zbp1", "Ripk1", "Ripk3", "Cxcl1", "Ccl20", "Tnf", "Csf1" ),group.by = "orig.ident", cols = c("blue","orange")) + RotatedAxis()
-p + ggtitle("Necroptosis Markers")
-dev.off()
-
-pdf("Lgr5 Marker Grouped.pdf", width=15, height=8)
-p = DotPlot(Lgr5Cre_MERGED,features = c("Lgr5" ), group.by = "orig.ident", cols = c("blue","orange")) + RotatedAxis()
-p + ggtitle("Lgr5 Marker")
-dev.off()
-
-pdf("GFP Marker Grouped.pdf", width=15, height=8)
-p = DotPlot(Lgr5Cre_MERGED,features = c("GFP"), group.by = "orig.ident", cols = c("blue","orange")) + RotatedAxis()
-p + ggtitle("GFP Marker")
-dev.off()
-
-pdf("Nature paper Markers.pdf", width=15, height=8)
-p = DotPlot(Lgr5Cre_MERGED,features = c("Mbl2","Ptprs","C4bp","Icam1","Ptpn22","Syk","Shmt2","Zfp809","Trim35","Bst2","Ltf","Mx1","Pml","Trim6","Adar","Mx2","S100a14","Gbp3","Ifitm3","Rnf135","Tmem173","Isg20","Jak3","Stat2","Oas2","Aim2","Oas1b","Dhx58","Oas1a","Eif2ak2","Zc3hav1","Ereg","Parp14","Zbp1","Cxcl16","Oasl2","Ddx58","Trim25","Rnf125","Vnn1","Pvr","Gbp4","Gbp10","Oasl1","Gbp8","Trim15","Cd55","Oas3","Isg15","Irf7","Trim12c","Ifit2","Ifit3","Trim30a","Nos2"), group.by = "orig.ident", cols = c("blue","orange")) + RotatedAxis()
-p + ggtitle("Nature Paper Markers")
 dev.off()
 
 ##################################################################################################################################################################################################################
@@ -570,119 +315,19 @@ plots <- VlnPlot(Lgr5Cre_MERGED, features = c(""), split.by = "orig.ident", pt.s
 wrap_plots(plots = plots, ncol = 1)
 dev.off()
 
-############################ Selected Markers
+# Selected Markers
 
 pdf("Violin Plot_Sis.pdf", width=15, height=10)
 VlnPlot(Lgr5Cre_MERGED, features = c("Sis"), split.by = "orig.ident")
 dev.off()
 
-pdf("Violin Plot_Fabp1.pdf", width=15, height=10)
-VlnPlot(Lgr5Cre_MERGED, features = c("Fabp1"), split.by = "orig.ident")
-dev.off()
-
-pdf("Violin Plot_Fabp6.pdf", width=15, height=10)
-VlnPlot(Lgr5Cre_MERGED, features = c("Fabp6"), split.by = "orig.ident")
-dev.off()
-
-pdf("Violin Plot_Muc2.pdf", width=15, height=10)
-VlnPlot(Lgr5Cre_MERGED, features = c("Muc2"), split.by = "orig.ident")
-dev.off()
-
-pdf("Violin Plot_Lyz1.pdf", width=15, height=10)
-VlnPlot(Lgr5Cre_MERGED, features = c("Lyz1"), split.by = "orig.ident")
-dev.off()
-
-pdf("Violin Plot_Neurod1.pdf", width=15, height=10)
-VlnPlot(Lgr5Cre_MERGED, features = c("Neurod1"), split.by = "orig.ident")
-dev.off()
-
-pdf("Violin Plot_Avil.pdf", width=15, height=10)
-VlnPlot(Lgr5Cre_MERGED, features = c("Avil"), split.by = "orig.ident")
-dev.off()
-
-############################ For cluster 0
+# For cluster 0
 
 pdf("Violin Plot_Olfm4.pdf", width=15, height=10)
 VlnPlot(Lgr5Cre_MERGED, features = c("Olfm4"), split.by = "orig.ident")
 dev.off()
 
-pdf("Violin Plot_Gkn3.pdf", width=15, height=10)
-VlnPlot(Lgr5Cre_MERGED, features = c("Gkn3"), split.by = "orig.ident")
-dev.off()
-
-pdf("Violin Plot_Ifitm3.pdf", width=15, height=10)
-VlnPlot(Lgr5Cre_MERGED, features = c("Ifitm3"), split.by = "orig.ident")
-dev.off()
-
-pdf("Violin Plot_Jaml.pdf", width=15, height=10)
-VlnPlot(Lgr5Cre_MERGED, features = c("Jaml"), split.by = "orig.ident")
-dev.off()
-
-pdf("Violin Plot_2410006H16Rik.pdf", width=15, height=10)
-VlnPlot(Lgr5Cre_MERGED, features = c("2410006H16Rik"), split.by = "orig.ident")
-dev.off()
-
-pdf("Violin Plot_Slc12a2.pdf", width=15, height=10)
-VlnPlot(Lgr5Cre_MERGED, features = c("Slc12a2"), split.by = "orig.ident")
-dev.off()
-
-pdf("Violin Plot_Cd74.pdf", width=15, height=10)
-VlnPlot(Lgr5Cre_MERGED, features = c("Cd74"), split.by = "orig.ident")
-dev.off()
-
-pdf("Violin Plot_Clca3b.pdf", width=15, height=10)
-VlnPlot(Lgr5Cre_MERGED, features = c("Clca3b"), split.by = "orig.ident")
-dev.off()
-
-pdf("Violin Plot_Pdgfa.pdf", width=15, height=10)
-VlnPlot(Lgr5Cre_MERGED, features = c("Pdgfa"), split.by = "orig.ident")
-dev.off()
-
-pdf("Violin Plot_Gas5.pdf", width=15, height=10)
-VlnPlot(Lgr5Cre_MERGED, features = c("Gas5"), split.by = "orig.ident")
-dev.off()
-
-############################  For Cluster 3
-
-pdf("Violin Plot_Pclaf.pdf", width=15, height=10)
-VlnPlot(Lgr5Cre_MERGED, features = c("Pclaf"), split.by = "orig.ident")
-dev.off()
-
-pdf("Violin Plot_Stmn1.pdf", width=15, height=10)
-VlnPlot(Lgr5Cre_MERGED, features = c("Stmn1"), split.by = "orig.ident")
-dev.off()
-
-pdf("Violin Plot_Dut.pdf", width=15, height=10)
-VlnPlot(Lgr5Cre_MERGED, features = c("Dut"), split.by = "orig.ident")
-dev.off()
-
-pdf("Violin Plot_Lig1.pdf", width=15, height=10)
-VlnPlot(Lgr5Cre_MERGED, features = c("Lig1"), split.by = "orig.ident")
-dev.off()
-
-pdf("Violin Plot_Pcna.pdf", width=15, height=10)
-VlnPlot(Lgr5Cre_MERGED, features = c("Pcna"), split.by = "orig.ident")
-dev.off()
-
-pdf("Violin Plot_Tyms.pdf", width=15, height=10)
-VlnPlot(Lgr5Cre_MERGED, features = c("Tyms"), split.by = "orig.ident")
-dev.off()
-
-pdf("Violin Plot_Hells.pdf", width=15, height=10)
-VlnPlot(Lgr5Cre_MERGED, features = c("Hells"), split.by = "orig.ident")
-dev.off()
-
-pdf("Violin Plot_Siva1.pdf", width=15, height=10)
-VlnPlot(Lgr5Cre_MERGED, features = c("Siva1"), split.by = "orig.ident")
-dev.off()
-
-pdf("Violin Plot_Olfm4.pdf", width=15, height=10)
-VlnPlot(Lgr5Cre_MERGED, features = c("Olfm4"), split.by = "orig.ident")
-dev.off()
-
-pdf("Violin Plot_Dek.pdf", width=15, height=10)
-VlnPlot(Lgr5Cre_MERGED, features = c("Dek"), split.by = "orig.ident")
-dev.off()
+##################################################################################################################################################################################################################
 
 # Split Ridge plots per markers
 
@@ -730,51 +375,6 @@ p =  DotPlot(Setdb1KO,features = c("Smim24","St3gal4","2200002D01Rik","Krt19","D
 p + ggtitle("Setdb1KO") + RotatedAxis()
 dev.off()
 
-pdf("WT_Enterocyte Mature top_markers.pdf", width=15, height=8)
-p =  DotPlot(WT,features = c("Smim24","St3gal4","2200002D01Rik","Krt19","Dmbt1","Gna11","Prap1","Gpx1","Serpinb6a","Reg1","Rbp2","Fabp1","Apoa1","Gsta1","Fabp2","Arg2","Gstm3","Adh6a","Sis","Apoc3","S100g"), idents = c(0,3),cols = c("blue","orange"))
-p + ggtitle("WT") + RotatedAxis()
-dev.off()
-
-
-pdf("Setdb1KO_Enterocyte Progenitor top_markers.pdf", width=15, height=8)
-p =  DotPlot(Setdb1KO,features = c("Ube2c","Hmgb2","Cenpa","Cks2","H2afx","Tubb4b","Cenpf","Tubb5","Ccnb2","Cdca3","Cdca8","Birc5","Rbp7","Dmbt1" ), idents = c(0,3),cols = c("blue","orange"))
-p + ggtitle("Setdb1KO") + RotatedAxis()
-dev.off()
-
-pdf("WT_Enterocyte Progenitor top_markers.pdf", width=15, height=8)
-p =  DotPlot(WT,features = c("Ube2c","Hmgb2","Cenpa","Cks2","H2afx","Tubb4b","Cenpf","Tubb5","Ccnb2","Cdca3","Cdca8","Birc5","Rbp7","Dmbt1" ), idents = c(0,3),cols = c("blue","orange"))
-p + ggtitle("WT") + RotatedAxis()
-dev.off()
-
-pdf("Setdb1KO_Tuf top_markers.pdf", width=15, height=8)
-p =  DotPlot(Setdb1KO,features = c("Rgs13","Alox5ap","Lrmp","Cd24a","Ltc4s","Hck","Fyb","Kctd12","Dclk1","Adh1","Krt18","Aldh2","Avil","Reep5","Sh2d6","Tuba1a","Espn","Tmem176b","Snrnp25"), idents = c(0,3),cols = c("blue","orange"))
-p + ggtitle("Setdb1KO") + RotatedAxis()
-dev.off()
-
-pdf("WT_Tuf top_markers.pdf", width=15, height=8)
-p =  DotPlot(WT,features = c("Rgs13","Alox5ap","Lrmp","Cd24a","Ltc4s","Hck","Fyb","Kctd12","Dclk1","Adh1","Krt18","Aldh2","Avil","Reep5","Sh2d6","Tuba1a","Espn","Tmem176b","Snrnp25"), idents = c(0,3),cols = c("blue","orange"))
-p + ggtitle("WT") + RotatedAxis()
-dev.off()
-
-pdf("Setdb1KO_Paneth top_markers.pdf", width=15, height=8)
-p =  DotPlot(Setdb1KO,features = c("Defa30","Gm14851","AY761184","Lyz1","Defa24","Defa22","Defa21","Defa29","Itln1","Defa36","Defa26","Defa23","Ang4","Mptx2","Defa17","Clps","Defa5","Gm15292","Gm15293"), idents = c(0,3),cols = c("blue","orange"))
-p + ggtitle("Setdb1KO") + RotatedAxis()
-dev.off()
-
-pdf("WT_Paneth top_markers.pdf", width=15, height=8)
-p =  DotPlot(WT,features = c("Defa30","Gm14851","AY761184","Lyz1","Defa24","Defa22","Defa21","Defa29","Itln1","Defa36","Defa26","Defa23","Ang4","Mptx2","Defa17","Clps","Defa5","Gm15292","Gm15293"), idents = c(0,3),cols = c("blue","orange"))
-p + ggtitle("WT") + RotatedAxis()
-dev.off()
-
-pdf("Setdb1KO_Goblet top_markers.pdf", width=15, height=8)
-p =  DotPlot(Setdb1KO,features = c("Zg16","Fcgbp","Muc2","Tff3","Clca1","Agr2","Spink4","Guca2a","Ccl6","Klk1","S100a6","Mptx1","Rep15","Selenom","Txndc5","Fxyd3","Ramp1","Tmsb10","Tpsg1"), idents = c(0,3),cols = c("blue","orange"))
-p + ggtitle("Setdb1KO") + RotatedAxis()
-dev.off()
-
-pdf("WT_Goblet top_markers.pdf", width=15, height=8)
-p =  DotPlot(WT,features = c("Zg16","Fcgbp","Muc2","Tff3","Clca1","Agr2","Spink4","Guca2a","Ccl6","Klk1","S100a6","Mptx1","Rep15","Selenom","Txndc5","Fxyd3","Ramp1","Tmsb10","Tpsg1"), idents = c(0,3),cols = c("blue","orange"))
-p + ggtitle("WT") + RotatedAxis()
-dev.off()
 
 ##################################################################################################################################################################################################################
 
