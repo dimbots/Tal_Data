@@ -489,7 +489,7 @@ plotPCA -in multiBam.npz -o PCA_readCounts.png -T "PCA of read counts"
 		plotHeatmap -m $out_matrix -out $out_plot --colorMap Blues --boxAroundHeatmaps no --missingDataColor 1
 
 		out_profile_plot="ProfilePlot_$out_matrix"
-		plotProfile -m $out_matrix -out $out_profile_plot --colors blue blue
+		plotProfile -m $out_matrix -out $out_profile_plot --colors blue blue blue blue
 
 		else
 
