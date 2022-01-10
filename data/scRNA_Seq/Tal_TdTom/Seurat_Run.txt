@@ -95,6 +95,14 @@ dev.off()
 
 ##################################################################################################################################################################################################################
 
+# Merge Setdb1KO with WT to new object Lgr5Cre_MERGED
+Lgr5Cre_MERGED=merge(Lgr5Cre_Setdb1KO.filt, y=Lgr5Cre_WT.filt, add.cell.ids=c("Setdb1KO","Lgr5Cre"), project="Lgr5Cre_MERGED")
+
+# Change replicates names within object. e.g(Setdb1KO_repA & Setdb1KO_repB -> Setdb1KO)
+Lgr5Cre_MERGED$orig.ident=plyr::mapvalues(x=Lgr5Cre_MERGED$orig.ident, from = c("Setdb1KO A", "Setdb1KO B", "Lgr5Cre A", "Lgr5Cre B"), to = c("Setdb1KO", "Setdb1KO", "Lgr5Cre", "Lgr5Cre"))
+
+##################################################################################################################################################################################################################
+
 # QC and selecting cells
 Lgr5Cre_MERGED[["percent.mt"]] <- PercentageFeatureSet(Lgr5Cre_MERGED, pattern = "^mt-")
 
