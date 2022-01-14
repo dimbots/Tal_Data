@@ -13,10 +13,10 @@ library(stringr)
 # CREATE OBJECT Lgr5Cre_SETDB1KO
 
 # Load dataset A (Object A)
-Lgr5Cre_Setdb1KO_A.data=Read10X(data.dir = "/media/dimbo/10T/data/talianidis_data/scRNA_Seq/Talianidis_GFP_2_fixed/analysis/Cellranger/run_count_21L004866/outs/filtered_feature_bc_matrix/")
+Lgr5Cre_Setdb1KO_A.data=Read10X(data.dir = "/media/dimbo/10T/data/talianidis_data/scRNA_seq/Talianidis_GFP_2_fixed/analysis/Cellranger/run_count_21L004866/outs/filtered_feature_bc_matrix/")
 Lgr5Cre_Setdb1KO_A = CreateSeuratObject(counts = Lgr5Cre_Setdb1KO_A.data, project = "Setdb1KO A", min.cells = 3, min.features = 200)
 # Load dataset B (Object B)
-Lgr5Cre_Setdb1KO_B.data <- Read10X(data.dir = "/media/dimbo/10T/data/talianidis_data/scRNA_Seq/Talianidis_GFP_2_fixed/analysis/Cellranger/run_count_21L004870/outs/filtered_feature_bc_matrix/")
+Lgr5Cre_Setdb1KO_B.data <- Read10X(data.dir = "/media/dimbo/10T/data/talianidis_data/scRNA_seq/Talianidis_GFP_2_fixed/analysis/Cellranger/run_count_21L004870/outs/filtered_feature_bc_matrix/")
 Lgr5Cre_Setdb1KO_B = CreateSeuratObject(counts = Lgr5Cre_Setdb1KO_B.data, project = "Setdb1KO B", min.cells = 3, min.features = 200)
 
 # Merge objects
@@ -27,10 +27,10 @@ Lgr5Cre_Setdb1KO=merge(Lgr5Cre_Setdb1KO_A, y=Lgr5Cre_Setdb1KO_B, add.cell.ids=c(
 # CREATE OBJECT LGR5Cre_WT
 
 # Load dataset A (Object A)
-Lgr5Cre_WT_A.data=Read10X(data.dir = "/media/dimbo/10T/data/talianidis_data/scRNA_Seq/Talianidis_GFP_2_fixed/analysis/Cellranger/run_count_21L004858/outs/filtered_feature_bc_matrix/")
+Lgr5Cre_WT_A.data=Read10X(data.dir = "/media/dimbo/10T/data/talianidis_data/scRNA_seq/Talianidis_GFP_2_fixed/analysis/Cellranger/run_count_21L004858/outs/filtered_feature_bc_matrix/")
 Lgr5Cre_WT_A = CreateSeuratObject(counts = Lgr5Cre_WT_A.data, project = "Lgr5Cre A", min.cells = 3, min.features = 200)
 # Load dataset B (Object B)
-Lgr5Cre_WT_B.data <- Read10X(data.dir = "/media/dimbo/10T/data/talianidis_data/scRNA_Seq/Talianidis_GFP_2_fixed/analysis/Cellranger/run_count_21L004862/outs/filtered_feature_bc_matrix/")
+Lgr5Cre_WT_B.data <- Read10X(data.dir = "/media/dimbo/10T/data/talianidis_data/scRNA_seq/Talianidis_GFP_2_fixed/analysis/Cellranger/run_count_21L004862/outs/filtered_feature_bc_matrix/")
 Lgr5Cre_WT_B = CreateSeuratObject(counts = Lgr5Cre_WT_B.data, project = "Lgr5Cre B", min.cells = 3, min.features = 200)
 
 # Merge objects
