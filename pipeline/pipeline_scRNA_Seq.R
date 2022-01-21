@@ -419,3 +419,15 @@ dev.off()
 
 # Keep cells with only 2000 reads
 #Lgr5Cre_MERGED <- subset(Lgr5Cre_MERGED, subset = nCount_RNA > 2000)
+
+
+
+
+##################################################################################################################################################################################################################
+
+# Create metadata from seurat object. (e.g extract specific clusters and recreate UMAP plots)
+Stem_and_Progenitor = subset(x=Lgr5Cre_MERGED_Renamed, idents = c("Stem","Enterocyte Progenitor II", "Enterocyte Progenitor I"))
+
+##################################################################################################################################################################################################################
+
+
