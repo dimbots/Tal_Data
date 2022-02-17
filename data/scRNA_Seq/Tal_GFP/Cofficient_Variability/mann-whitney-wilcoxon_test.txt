@@ -1,0 +1,10 @@
+# Mann-Whitney-Wilcoxon Test
+
+# Read the values of coefficient of variation for KO and WT
+ko_values = read.csv(file = "/media/dimbo/10T/data/talianidis_data/scRNA_seq/Talianidis_GFP_2_fixed/analysis/Seurat/Cofficient_Variability/cut_off_10/test_wilcox/cv_ko.tsv", header = FALSE)
+wt_values = read.csv(file = "/media/dimbo/10T/data/talianidis_data/scRNA_seq/Talianidis_GFP_2_fixed/analysis/Seurat/Cofficient_Variability/cut_off_10/test_wilcox/cv_wt.tsv", header = FALSE)
+# convert list to double
+ko_values = as.numeric(unlist(ko_values))
+wt_values = as.numeric(unlist(wt_values))
+# Run Mann-Whitney-Wilcoxon Test
+wilcox_test = wilcox.test(ko_values, wt_values)

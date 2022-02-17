@@ -19,8 +19,8 @@ awk 'NR==1 {print; exit}' KO_Gene_Count_per_Cell.3.tsv > ko_label.tmp
 awk 'NR==1 {print; exit}' WT_Gene_Count_per_Cell.3.tsv > wt_label.tmp
 
 # exclude genes where the sum of reads of all cells is greater than 50
-awk '$NF >50 {print $0}' KO_Gene_Count_per_Cell.3.tsv > KO_Gene_Count_per_Cell.4.tsv   # 8556 genes remain out of 17094
-awk '$NF >50 {print $0}' WT_Gene_Count_per_Cell.3.tsv > WT_Gene_Count_per_Cell.4.tsv   # 9351 genes remain out of 17094
+awk '$NF >10 {print $0}' KO_Gene_Count_per_Cell.3.tsv > KO_Gene_Count_per_Cell.4.tsv   # 8556 genes remain out of 17094
+awk '$NF >10 {print $0}' WT_Gene_Count_per_Cell.3.tsv > WT_Gene_Count_per_Cell.4.tsv   # 9351 genes remain out of 17094
 rm KO_Gene_Count_per_Cell.3.tsv WT_Gene_Count_per_Cell.3.tsv
 
 # paste label to files
