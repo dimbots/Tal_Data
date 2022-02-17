@@ -8,3 +8,7 @@ ko_values = as.numeric(unlist(ko_values))
 wt_values = as.numeric(unlist(wt_values))
 # Run Mann-Whitney-Wilcoxon Test
 wilcox_test = wilcox.test(ko_values, wt_values)
+
+
+
+# p-value = 1.232e-15
