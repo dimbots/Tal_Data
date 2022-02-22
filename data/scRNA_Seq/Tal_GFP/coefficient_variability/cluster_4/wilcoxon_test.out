@@ -1,5 +1,5 @@
 Wilcoxon rank sum test with continuity correction
 
 data:  coefficient_variation$Setdb1KO and coefficient_variation$Lgr5Cre
-W = 100601758, p-value < 2.2e-16
+W = 89139846, p-value < 2.2e-16
 alternative hypothesis: true location shift is not equal to 0
