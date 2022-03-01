@@ -98,7 +98,7 @@ hisat2 --threads 8 --no-spliced-alignment --summary-file $summary -x $genome -U 
 
 # filter reads
 #samtools view -@ 8 -h -F 4 $input_sam | awk 'substr($1, 0, 1)=="@" || $0 !~ /ZS:/' | samtools view -h -b > $output_bam_tmp
-samtools view -@ 8 -bq -F 4 $input_sam > $output_bam_tmp
+samtools view -@ 8 -bq 30 -F 4 $input_sam > $output_bam_tmp
 
 # remove dublicates
 samtools rmdup -s $output_bam_tmp $output_bam
