@@ -8,7 +8,9 @@ library(ggplot2)
 library(cowplot)
 library(stringr)
 
+
 ########################################################################################################################################################################################################################
+
 
 # CREATE OBJECT Lgr5Cre_SETDB1KO
 
@@ -22,7 +24,9 @@ Lgr5Cre_Setdb1KO_B = CreateSeuratObject(counts = Lgr5Cre_Setdb1KO_B.data, projec
 # Merge objects
 Lgr5Cre_Setdb1KO=merge(Lgr5Cre_Setdb1KO_A, y=Lgr5Cre_Setdb1KO_B, add.cell.ids=c("Rep_A","Rep_B"), project="Lgr5Cre_Setdb1KO")
 
+
 ##################################################################################################################################################################################################################
+
 
 # CREATE OBJECT LGR5Cre_WT
 
@@ -36,7 +40,9 @@ Lgr5Cre_WT_B = CreateSeuratObject(counts = Lgr5Cre_WT_B.data, project = "Lgr5Cre
 # Merge objects
 Lgr5Cre_WT=merge(Lgr5Cre_WT_A, y=Lgr5Cre_WT_B, add.cell.ids=c("Rep_A","Rep_B"), project="Lgr5Cre_WT")
 
+
 ##################################################################################################################################################################################################################
+
 
 #FIND DOUBLETS IN EACH CONDITION SEPARATELY
 
@@ -66,7 +72,9 @@ dev.off()
 
 Lgr5Cre_Setdb1KO.filt = Lgr5Cre_Setdb1KO.filt[, Lgr5Cre_Setdb1KO.filt@meta.data[, DF.name] == "Singlet"]
 
+
 ##################################################################################################################################################################################################################
+
 
 Lgr5Cre_WT <- NormalizeData(Lgr5Cre_WT, normalization.method = "LogNormalize", scale.factor = 10000)
 
@@ -92,7 +100,9 @@ pdf("VlnPlot_WT.pdf", width=15, height=8)
 VlnPlot(Lgr5Cre_WT.filt, features = "nFeature_RNA", group.by = DF.name, pt.size = 0.1)
 dev.off()
 
+
 ##################################################################################################################################################################################################################
+
 
 # Merge Setdb1KO with WT to new object Lgr5Cre_MERGED
 Lgr5Cre_MERGED=merge(Lgr5Cre_Setdb1KO.filt, y=Lgr5Cre_WT.filt, add.cell.ids=c("Setdb1KO","Lgr5Cre"), project="Lgr5Cre_MERGED")
@@ -100,7 +110,9 @@ Lgr5Cre_MERGED=merge(Lgr5Cre_Setdb1KO.filt, y=Lgr5Cre_WT.filt, add.cell.ids=c("S
 # Change replicates names within object. e.g(Setdb1KO_repA & Setdb1KO_repB -> Setdb1KO)
 Lgr5Cre_MERGED$orig.ident=plyr::mapvalues(x=Lgr5Cre_MERGED$orig.ident, from = c("Setdb1KO A", "Setdb1KO B", "Lgr5Cre A", "Lgr5Cre B"), to = c("Setdb1KO", "Setdb1KO", "Lgr5Cre", "Lgr5Cre"))
 
+
 ##################################################################################################################################################################################################################
+
 
 # QC and selecting cells
 Lgr5Cre_MERGED[["percent.mt"]] <- PercentageFeatureSet(Lgr5Cre_MERGED, pattern = "^mt-")
@@ -130,7 +142,7 @@ plot1 + plot2
 dev.off()
 
 # Filtering cells 
-Lgr5Cre_MERGED <- subset(Lgr5Cre_MERGED, subset = nFeature_RNA > 200 & nFeature_RNA < 3800 & percent.mt < 5)
+Lgr5Cre_MERGED <- subset(Lgr5Cre_MERGED, subset = nFeature_RNA > 200 & nFeature_RNA < 4000 & percent.mt < 5)
 
 # Normalize the data
 Lgr5Cre_MERGED <- NormalizeData(Lgr5Cre_MERGED, normalization.method = "LogNormalize", scale.factor = 10000)
@@ -225,7 +237,9 @@ pdf("Top10_Markers.pdf", width=15, height=8)
 DotPlot(Lgr5Cre_MERGED, features = c("Reg3g", "Gsdmc4", "Prss32", "Krt8", "Elf3", "Sis", "Fabp1", "Hnf4a", "Tmigd1", "Fabp6"), split.by = "orig.ident")
 dev.off()
 
+
 ##################################################################################################################################################################################################################
+
 
 # Extract metadata
 md = Lgr5Cre_MERGED@meta.data %>% as.data.table()
@@ -272,7 +286,9 @@ write.table(cluster14.markers, file = "cluster14.markers.tsv", sep = "\t", row.n
 # Mat code
 #Lgr5Cre_MERGED.markers = FindAllMarkers(Lgr5Cre_MERGED, only.pos = F, min.pct = 0.25, logfc.threshold = 0.37)
 
+
 ##################################################################################################################################################################################################################
+
 
 # Feature Plots based on most variable features per cluster
 
@@ -402,7 +418,9 @@ pdf("Feature plot Selected Markers.pdf", width=20, height=40)
 FeaturePlot(Lgr5Cre_MERGED, features = c("Sis", "Fabp1", "Fabp6", "Muc2", "Lyz1", "Neurod1", "Avil" ), split.by = "orig.ident", cols = c("grey" ,"blue"))
 dev.off()
 
+
 ##################################################################################################################################################################################################################
+
 
 # DotPlots per Cluster
 
@@ -478,7 +496,9 @@ p = DotPlot(Lgr5Cre_MERGED,features = c("Mbl2","Ptprs","C4bp","Icam1","Ptpn22","
 p + ggtitle("Nature Paper Markers")
 dev.off()
 
+
 ##################################################################################################################################################################################################################
+
 
 # Dot plots per condition
 
@@ -554,7 +574,9 @@ p = DotPlot(Lgr5Cre_MERGED,features = c("Mbl2","Ptprs","C4bp","Icam1","Ptpn22","
 p + ggtitle("Nature Paper Markers")
 dev.off()
 
+
 ##################################################################################################################################################################################################################
+
 
 # Umap renamed cluster
 pdf("Umap_renamed_Clusterd Markers.pdf", width=15, height=8)
@@ -562,7 +584,9 @@ Lgr5Cre_MERGED_Renamed=RenameIdents(Lgr5Cre_MERGED,  `0` = "Stem", `1` = "Entero
 DimPlot(Lgr5Cre_MERGED_Renamed, label = TRUE)
 dev.off()
 
+
 ##################################################################################################################################################################################################################
+
 
 # Split violin plots per markers
 pdf("Violin Plot_Birc5.pdf", width=15, height=10)
@@ -570,7 +594,9 @@ plots <- VlnPlot(Lgr5Cre_MERGED, features = c(""), split.by = "orig.ident", pt.s
 wrap_plots(plots = plots, ncol = 1)
 dev.off()
 
+
 ############################ Selected Markers
+
 
 pdf("Violin Plot_Sis.pdf", width=15, height=10)
 VlnPlot(Lgr5Cre_MERGED, features = c("Sis"), split.by = "orig.ident")
@@ -600,7 +626,9 @@ pdf("Violin Plot_Avil.pdf", width=15, height=10)
 VlnPlot(Lgr5Cre_MERGED, features = c("Avil"), split.by = "orig.ident")
 dev.off()
 
+
 ############################ For cluster 0
+
 
 pdf("Violin Plot_Olfm4.pdf", width=15, height=10)
 VlnPlot(Lgr5Cre_MERGED, features = c("Olfm4"), split.by = "orig.ident")
@@ -642,7 +670,9 @@ pdf("Violin Plot_Gas5.pdf", width=15, height=10)
 VlnPlot(Lgr5Cre_MERGED, features = c("Gas5"), split.by = "orig.ident")
 dev.off()
 
+
 ############################  For Cluster 3
+
 
 pdf("Violin Plot_Pclaf.pdf", width=15, height=10)
 VlnPlot(Lgr5Cre_MERGED, features = c("Pclaf"), split.by = "orig.ident")
@@ -690,7 +720,9 @@ pdf("RidgePlot_Olfm4.pdf", width=15, height=10)
 RidgePlot(Lgr5Cre_MERGED_Renamed, features = c("Olfm4"), ncol = 2)
 dev.off()
 
+
 ##################################################################################################################################################################################################################
+
 
 # Cell cycle
 
@@ -721,7 +753,9 @@ Lgr5Cre_MERGED <- RunPCA(Lgr5Cre_MERGED, features = VariableFeatures(Lgr5Cre_MER
 Lgr5Cre_MERGED <- RunPCA(Lgr5Cre_MERGED, features = c(s.genes, g2m.genes))
 DimPlot(Lgr5Cre_MERGED)
 
+
 ##################################################################################################################################################################################################################
+
 
 # Create dot plots - on specific clusters and selected markers
 
@@ -776,7 +810,9 @@ p =  DotPlot(WT,features = c("Zg16","Fcgbp","Muc2","Tff3","Clca1","Agr2","Spink4
 p + ggtitle("WT") + RotatedAxis()
 dev.off()
 
+
 ##################################################################################################################################################################################################################
+
 
 # Create metadata from main object. e.g export WT and Setdb1KO from Merged object and create two new objects
 
@@ -789,7 +825,9 @@ Setdb1KO = split_obj[["Setdb1KO"]]
 
 WT = split_obj[["Lgr5Cre"]]
 
+
 ##################################################################################################################################################################################################################
+
 
 # Calculate averaged expression values for each identity class
 avg_exp_Setdb1KO = (AverageExpression(object = Setdb1KO))
@@ -800,7 +838,9 @@ write.table(avg_exp_Setdb1KO, file = "avg_exp_Setdb1KO.txt", sep = "\t",
 write.table(avg_exp_WT, file = "avg_exp_WT.txt", sep = "\t",
             row.names = TRUE, col.names = NA)
 
+
 ##################################################################################################################################################################################################################
+
 
 # Create violin plots for setdb1KO and WT metadata (merged normalized-processed and then split) for nfeatures 
 # ncount per cluster.
@@ -842,9 +882,6 @@ Lgr5Cre_0.1.3.4.5=RunUMAP(Lgr5Cre_0.1.3.4.5, dims = 1:10)
 pdf("umapPlot_Lgr5Cre_0.1.3.4.5.pdf", width=15, height=8)
 DimPlot(Lgr5Cre_0.1.3.4.5, reduction = "umap")
 dev.off()
-
-
-##################################################################################################################################################################################################################
 
 
 # DOTPLOTS
@@ -902,9 +939,6 @@ p + ggtitle("Cdk2 Marker")
 dev.off()
 
 
-##################################################################################################################################################################################################################
-
-
 # Rename UMAP
 
 
@@ -958,25 +992,60 @@ dev.off()
 
 ##################################################################################################################################################################################################################
 
-# TRAJECTORY ANALYSIS
+# Calculate Coefficient of Variability in gene expression
+
+# subset cluster 0
+Lgr5Cre_012345=subset(Lgr5Cre_MERGED, idents = ("0", "1", "2", "3", "4", "5"))
+
+# create two matrix file for gene count per cell (KO and WT)
+# WT
+Lgr5Cre_012345_WT=subset(Lgr5Cre_012345, subset = orig.ident == "Lgr5Cre")
+# KO
+Lgr5Cre_012345_KO=subset(Lgr5Cre_012345, subset = orig.ident == "Setdb1KO")
+
+
+# Save file with gene expression per cell type per condition
+# WT
+write.table(Lgr5Cre_5_WT@assays[["RNA"]]@counts, file='WT_Gene_Count_per_Cell.tmp', quote=FALSE, sep='\t', col.names = TRUE)
+# KO
+write.table(Lgr5Cre_5_KO@assays[["RNA"]]@counts, file='KO_Gene_Count_per_Cell.tmp', quote=FALSE, sep='\t', col.names = TRUE)
+
+# read the filtered file
+KO_matrix_Filtered = read.table("/media/dimbo/10T/data/talianidis_data/scRNA_seq/Talianidis_GFP_2_fixed/analysis/Seurat/coefficient_variability/cluster_5/KO_Gene_Count_per_Cell.tmp", sep = "\t", header = TRUE, row.names = 1 )
+WT_matrix_Filtered = read.table("/media/dimbo/10T/data/talianidis_data/scRNA_seq/Talianidis_GFP_2_fixed/analysis/Seurat/coefficient_variability/cluster_5/WT_Gene_Count_per_Cell.tmp", sep = "\t", header = TRUE, row.names = 1 ) 
+
+# calculate coefficient variability and add results in the file
+KO_matrix_Filtered$cv  <- apply(KO_matrix_Filtered, 1,  function(x) sd(x) / mean(x) * 100)
+WT_matrix_Filtered$cv  <- apply(WT_matrix_Filtered, 1,  function(x) sd(x) / mean(x) * 100)
+
+# send back to bash for file manipulation and filtering
+write.table(KO_matrix_Filtered, file = "KO.tmp", row.names = FALSE, sep = "\t")
+write.table(WT_matrix_Filtered, file = "WT.tmp", row.names = FALSE, sep = "\t")
+
+coefficient_variation = read.table("/media/dimbo/10T/data/talianidis_data/scRNA_seq/Talianidis_GFP_2_fixed/analysis/Seurat/coefficient_variability/cluster_5/coefficient_variation.tsv", sep = "\t", header = TRUE)
+colnames(coefficient_variation) = c("Setdb1KO", "Lgr5Cre")
+
+pdf("boxplot_cv.pdf")
+colors <- c("blue","orange")
+boxplot(coefficient_variation, ylab = "coefficient variation", col = colors, main = "Progenitor Cells - Cluster 5", outline = FALSE)
+dev.off()
+
 
 ##################################################################################################################################################################################################################
 
-# save metadata table:
-Lgr5Cre_MERGED$barcode <- colnames(Lgr5Cre_MERGED)
-Lgr5Cre_MERGED$UMAP_1 <- Lgr5Cre_MERGED@reductions$umap@cell.embeddings[,1]
-Lgr5Cre_MERGED$UMAP_2 <- Lgr5Cre_MERGED@reductions$umap@cell.embeddings[,2]
-write.csv(Lgr5Cre_MERGED@meta.data, file='metadata.csv', quote=F, row.names=F)
 
-# write expression counts matrix
-counts_matrix <- GetAssayData(Lgr5Cre_MERGED, assay='RNA', slot='counts')
-writeMM(counts_matrix, file=paste0("/media/dimbo/10T/data/talianidis_data/scRNA_seq/Talianidis_GFP_2_fixed/analysis/Seurat/trajectory_analysis/", 'counts.mtx'))
+# Mann-Whitney-Wilcoxon Test
 
-# write dimesnionality reduction matrix, in this example case pca matrix
-write.csv(Lgr5Cre_MERGED@reductions$pca@cell.embeddings, file='pca.csv', quote=F, row.names=F)
+# Read the values of coefficient of variation for KO and WT
+#ko_values = read.csv(file = "/media/dimbo/10T/data/talianidis_data/scRNA_seq/Talianidis_GFP_2_fixed/analysis/Seurat/coefficient_variability/TEST/", header = FALSE)
+#wt_values = read.csv(file = "/media/dimbo/10T/data/talianidis_data/scRNA_seq/Talianidis_GFP_2_fixed/analysis/Seurat/coefficient_variability/TEST/wt", header = FALSE)
+# convert list to double
+#ko_values = as.numeric(unlist(ko_values))
+#wt_values = as.numeric(unlist(wt_values))
+# Run Mann-Whitney-Wilcoxon Test
+wilcox.test(coefficient_variation$Setdb1KO, coefficient_variation$Lgr5Cre)
 
-# write gene names
-write.table(data.frame('gene'=rownames(counts_matrix)),file='gene_names.csv', quote=F,row.names=F,col.names=F)
+##################################################################################################################################################################################################################
 
 
 
