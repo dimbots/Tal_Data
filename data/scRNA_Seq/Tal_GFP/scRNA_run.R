@@ -227,6 +227,11 @@ pdf("feature_plot_top_10_MostVariantGenes.pdf", width=15, height=8)
 FeaturePlot(Lgr5Cre_MERGED, features = top10)
 dev.off()
 
+# Feature plot on quality metrics ()
+pdf("feautre plot qc_metrics.pdf", width = 13, height = 8)
+FeaturePlot(Lgr5Cre_MERGED, features = c("nFeature_RNA", "nCount_RNA", "percent.mt"), cols = c("cornsilk1" ,"blue1"))
+dev.off()
+
 # Dot plot per top 10 genes
 pdf("DotPlot_Lgr5cre.pdf", width=15, height=8)
 DotPlot(Lgr5Cre_MERGED, cols = c("blue", "orange"), group.by = "orig.ident", features = top10)
@@ -1048,6 +1053,35 @@ wilcox.test(coefficient_variation$Setdb1KO, coefficient_variation$Lgr5Cre)
 ##################################################################################################################################################################################################################
 
 
+# Trajectory analysis
+
+monocle_Lgr5Cre_MERGED <- as.cell_data_set(Lgr5Cre_MERGED)
+monocle_Lgr5Cre_MERGED <- cluster_cells(cds = monocle_Lgr5Cre_MERGED, reduction_method = "UMAP")
+monocle_Lgr5Cre_MERGED <- learn_graph(monocle_Lgr5Cre_MERGED, use_partition = TRUE)
+monocle_Lgr5Cre_MERGED <- order_cells(monocle_Lgr5Cre_MERGED,reduction_method = "UMAP")
+
+
+pdf("trajectory_Lgr5Cre_Merged.pdf", width = 14, height = 8)
+plot_cells(monocle_Lgr5Cre_MERGED,
+           color_cells_by = "pseudotime",
+           graph_label_size=5,
+           show_trajectory_graph = TRUE)
+dev.off()
+
+# SubClusters
+
+monocle_Lgr5Cre_subset <- as.cell_data_set(Lgr5Cre_0.1.3.4.5)
+monocle_Lgr5Cre_subset <- cluster_cells(cds = monocle_Lgr5Cre_subset, reduction_method = "UMAP")
+monocle_Lgr5Cre_subset <- learn_graph(monocle_Lgr5Cre_subset, use_partition = TRUE)
+monocle_Lgr5Cre_subset <- order_cells(monocle_Lgr5Cre_subset,reduction_method = "UMAP")
+
+
+pdf("trajectory_Lgr5Cre_subset.pdf", width = 14, height = 8)
+plot_cells(monocle_Lgr5Cre_subset,
+           color_cells_by = "pseudotime",
+           graph_label_size=5,
+           show_trajectory_graph = TRUE)
+dev.off()
 
 
 
