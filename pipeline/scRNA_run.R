@@ -1086,6 +1086,38 @@ plot_cells(monocle_Lgr5Cre_subset,
            show_trajectory_graph = TRUE)
 dev.off()
 
+###############################################
 
+# Trajectroy analysis on split conditions
+ko = subset(x = Lgr5Cre_MERGED, subset = orig.ident == "Setdb1KO")
+wt = subset(x = Lgr5Cre_MERGED, subset = orig.ident == "Lgr5Cre")
+
+
+monocle_ko <- as.cell_data_set(ko)
+monocle_ko <- cluster_cells(cds = monocle_ko, reduction_method = "UMAP")
+monocle_ko <- learn_graph(monocle_ko, use_partition = TRUE)
+monocle_ko <- order_cells(monocle_ko,reduction_method = "UMAP")
+
+
+pdf("trajectory_KO.pdf", width = 14, height = 8)
+plot_cells(monocle_ko,
+           color_cells_by = "pseudotime",
+           graph_label_size=5,
+           show_trajectory_graph = FALSE)
+dev.off()
+
+
+monocle_wt <- as.cell_data_set(wt)
+monocle_wt <- cluster_cells(cds = monocle_wt, reduction_method = "UMAP")
+monocle_wt <- learn_graph(monocle_wt, use_partition = TRUE)
+monocle_wt <- order_cells(monocle_wt,reduction_method = "UMAP")
+
+
+pdf("trajectory_WT.pdf", width = 14, height = 8)
+plot_cells(monocle_wt,
+           color_cells_by = "pseudotime",
+           graph_label_size=5,
+           show_trajectory_graph = FALSE)
+dev.off()
 
 
