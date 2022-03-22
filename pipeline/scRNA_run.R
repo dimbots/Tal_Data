@@ -1121,3 +1121,40 @@ plot_cells(monocle_wt,
 dev.off()
 
 
+
+###############################################################################
+
+# SubClusters
+
+# subset clusters for KO
+KO_012345=subset(x = Lgr5Cre_0.1.3.4.5, subset = orig.ident == "Setdb1KO")
+WT_012345=subset(x = Lgr5Cre_0.1.3.4.5, subset = orig.ident == "Lgr5Cre")
+
+# Setdb1KO
+monocle_ko <- as.cell_data_set(KO_012345)
+monocle_ko <- cluster_cells(cds = monocle_ko, reduction_method = "UMAP")
+monocle_ko <- learn_graph(monocle_ko, use_partition = TRUE)
+monocle_ko <- order_cells(monocle_ko,reduction_method = "UMAP")
+
+pdf("trajectory_Subset_KO.pdf", width = 14, height = 8)
+plot_cells(monocle_ko,
+           color_cells_by = "pseudotime",
+           graph_label_size=5,
+           show_trajectory_graph = FALSE)
+dev.off()
+
+# Lgr5Cre
+monocle_wt <- as.cell_data_set(WT_012345)
+monocle_wt <- cluster_cells(cds = monocle_wt, reduction_method = "UMAP")
+monocle_wt <- learn_graph(monocle_wt, use_partition = TRUE)
+monocle_wt <- order_cells(monocle_wt,reduction_method = "UMAP")
+
+pdf("trajectory_Subset_WT.pdf", width = 14, height = 8)
+plot_cells(monocle_wt,
+           color_cells_by = "pseudotime",
+           graph_label_size=5,
+           show_trajectory_graph = FALSE)
+dev.off()
+
+
+
