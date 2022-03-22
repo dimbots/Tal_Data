@@ -7,7 +7,10 @@ library(magrittr)
 library(ggplot2)
 library(cowplot)
 library(stringr)
-
+library(Signac)
+library(SeuratWrappers)
+library(monocle3)
+library(Matrix)
 
 ########################################################################################################################################################################################################################
 
