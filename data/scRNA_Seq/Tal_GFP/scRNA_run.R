@@ -1083,6 +1083,56 @@ plot_cells(monocle_Lgr5Cre_subset,
            show_trajectory_graph = TRUE)
 dev.off()
 
+############################################################################################
+
+# Identification of highly variable features between clusters (Stem I and Stem II)
+
+# Subset clusters and recluster
+Lgr5Cre_0.1.3.4.5=subset(Lgr5Cre_MERGED, idents = c(0,1,3,4,5))
+
+top10_Lgr5Cre_0.1.3.4.5 <- head(VariableFeatures(Lgr5Cre_0.1.3.4.5), 10)
+
+Lgr5Cre_0.1.3.4.5 <- RunPCA(Lgr5Cre_0.1.3.4.5, features = VariableFeatures(object = Lgr5Cre_0.1.3.4.5))
+print(Lgr5Cre_0.1.3.4.5[["pca"]], dims = 1:5, nfeatures = 5)
+
+Lgr5Cre_0.1.3.4.5=FindNeighbors(Lgr5Cre_0.1.3.4.5,,dims = 1:10)
+Lgr5Cre_0.1.3.4.5 <- FindClusters(Lgr5Cre_0.1.3.4.5, resolution = 0.5)
+
+Lgr5Cre_0.1.3.4.5=RunUMAP(Lgr5Cre_0.1.3.4.5, dims = 1:10)
+
+
+
+Lgr5Cre_0.1_Renamed=RenameIdents(Lgr5Cre_0.1,  `0` = "Stem II", `1` = "Stem I")
+pdf("UMAP_STEM.pdf", width = 14, height = 8)
+DimPlot(Lgr5Cre_0.1_Renamed)
+dev.off()
+# Subset Stem clusters
+Lgr5Cre_0.1.3.4.5=subset(Lgr5Cre_MERGED, idents = c(0,1,3,4,5))
+
+Lgr5Cre_0.1 = subset(Lgr5Cre_0.1.3.4.5, idents = c(0,1))
+
+# Identification of highly variable features between Stem I and Stem II
+Lgr5Cre_0.1 <- FindVariableFeatures(Lgr5Cre_0.1, selection.method = "vst", nfeatures = 2000)
+
+# Identify the 10 most highly variable genes
+top10 <- head(VariableFeatures(Lgr5Cre_0.1), 10)
+
+# plot variable features with and without labels
+plot1 <- VariableFeaturePlot(Lgr5Cre_0.1)
+plot2 <- LabelPoints(plot = plot1, points = top10, repel = TRUE)
+pdf("top_10_mvf_StemI_StemII.pdf", width = 14, height = 8)
+plot2
+dev.off()
+
+# Plot violin in Reg3b and Reg3g
+pdf("Violin_Reg3b_Reg3g.pdf", width = 14, height = 8)
+VlnPlot(Lgr5Cre_0.1, features = c("Reg3b", "Reg3g"), slot = "counts", log = TRUE)
+dev.off()
+
+# Plot feature in Reg3b and Reg3g
+pdf("featureplot_Reg3b_Reg3g.pdf", width = 14, height = 8)
+FeaturePlot(Lgr5Cre_0.1, features = c("Reg3b", "Reg3g"), cols = c("light yellow", "blue"))
+dev.off()
 
 
 
