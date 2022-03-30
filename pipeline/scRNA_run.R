@@ -1068,7 +1068,8 @@ pdf("trajectory_Lgr5Cre_Merged.pdf", width = 14, height = 8)
 plot_cells(monocle_Lgr5Cre_MERGED,
            color_cells_by = "pseudotime",
            graph_label_size=5,
-           show_trajectory_graph = TRUE)
+           show_trajectory_graph = FALSE,
+           cell_size = 0.55)
 dev.off()
 
 # SubClusters
@@ -1079,11 +1080,13 @@ monocle_Lgr5Cre_subset <- learn_graph(monocle_Lgr5Cre_subset, use_partition = TR
 monocle_Lgr5Cre_subset <- order_cells(monocle_Lgr5Cre_subset,reduction_method = "UMAP")
 
 
-pdf("trajectory_Lgr5Cre_subset.pdf", width = 14, height = 8)
+pdf("trajectory_MERGED_subset.pdf", width = 14, height = 8)
 plot_cells(monocle_Lgr5Cre_subset,
            color_cells_by = "pseudotime",
            graph_label_size=5,
-           show_trajectory_graph = TRUE)
+           show_trajectory_graph = FALSE,
+           cell_size = 0.55,
+           )
 dev.off()
 
 ###############################################
@@ -1103,7 +1106,8 @@ pdf("trajectory_KO.pdf", width = 14, height = 8)
 plot_cells(monocle_ko,
            color_cells_by = "pseudotime",
            graph_label_size=5,
-           show_trajectory_graph = FALSE)
+           show_trajectory_graph = FALSE,
+           cell_size = 0.55)
 dev.off()
 
 
@@ -1117,7 +1121,8 @@ pdf("trajectory_WT.pdf", width = 14, height = 8)
 plot_cells(monocle_wt,
            color_cells_by = "pseudotime",
            graph_label_size=5,
-           show_trajectory_graph = FALSE)
+           show_trajectory_graph = FALSE,
+           cell_size = 0.55)
 dev.off()
 
 
@@ -1140,7 +1145,8 @@ pdf("trajectory_Subset_KO.pdf", width = 14, height = 8)
 plot_cells(monocle_ko,
            color_cells_by = "pseudotime",
            graph_label_size=5,
-           show_trajectory_graph = FALSE)
+           show_trajectory_graph = FALSE,
+           cell_size = 0.55)
 dev.off()
 
 # Lgr5Cre
@@ -1153,7 +1159,8 @@ pdf("trajectory_Subset_WT.pdf", width = 14, height = 8)
 plot_cells(monocle_wt,
            color_cells_by = "pseudotime",
            graph_label_size=5,
-           show_trajectory_graph = FALSE)
+           show_trajectory_graph = FALSE,
+           cell_size = 0.55)
 dev.off()
 
 ############################################################################################
@@ -1174,6 +1181,7 @@ Lgr5Cre_0.1.3.4.5 <- FindClusters(Lgr5Cre_0.1.3.4.5, resolution = 0.5)
 Lgr5Cre_0.1.3.4.5=RunUMAP(Lgr5Cre_0.1.3.4.5, dims = 1:10)
 
 
+Lgr5Cre_0.1 = subset(Lgr5Cre_0.1.3.4.5, idents = c(0,1))
 
 Lgr5Cre_0.1_Renamed=RenameIdents(Lgr5Cre_0.1,  `0` = "Stem II", `1` = "Stem I")
 pdf("UMAP_STEM.pdf", width = 14, height = 8)
@@ -1182,7 +1190,6 @@ dev.off()
 # Subset Stem clusters
 Lgr5Cre_0.1.3.4.5=subset(Lgr5Cre_MERGED, idents = c(0,1,3,4,5))
 
-Lgr5Cre_0.1 = subset(Lgr5Cre_0.1.3.4.5, idents = c(0,1))
 
 # Identification of highly variable features between Stem I and Stem II
 Lgr5Cre_0.1 <- FindVariableFeatures(Lgr5Cre_0.1, selection.method = "vst", nfeatures = 2000)
