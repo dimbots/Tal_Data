@@ -624,5 +624,22 @@ CombineTracks(
 dev.off()
 
 
+# Peak calling and plot coverage with cellranger peaks and macs2
+peaks <- CallPeaks(
+  object = ATAC_MERGED.filt,
+  group.by = "predicted.id",
+  broad = TRUE,
+  effective.genome.size = 2652783500
+)
+
+pdf("out_muc2", height = 8, width = 8)
+CoveragePlot(
+  object = ATAC_MERGED.filt,
+  region = "Olfm4",
+  ranges = peaks,
+  ranges.title = "MACS2"
+)
+
+dev.off()
 
 
