@@ -1214,6 +1214,27 @@ pdf("featureplot_Reg3b_Reg3g.pdf", width = 14, height = 8)
 FeaturePlot(Lgr5Cre_0.1, features = c("Reg3b", "Reg3g"), cols = c("light yellow", "blue"))
 dev.off()
 
+# Plot feature in Cd74
+pdf("featureplot_Dd74.pdf", width = 14, height = 8)
+FeaturePlot(Lgr5Cre_0.1, features = c("Cd74"), cols = c("light yellow", "blue"))
+dev.off()
+
+
+#######################################################################
+
+# Dotplots in Stem I and Stem II from subset Lgr5Cre_0.1.3.4.5 (based on most variable features from
+# stem I and stem II)
+
+
+pdf("Stem I and II Markers.pdf", width=14, height=8)
+p =  DotPlot(Lgr5Cre_0.1,features = c("Reg3b", "Reg3g", "Atf3", "Itln1", "S100a6", "Pclaf", "Fabp1",  "Bglap3", "Acta1") ,cols = c("blue","orange"))
+p + ggtitle("Stem I vs Stem II") + RotatedAxis()
+dev.off()
+
+
+pdf("Vln Plot Cd74.pdf", width=15, height=10)
+VlnPlot(Lgr5Cre_0.1, features = c("Cd74"))
+dev.off()
 
 
 
