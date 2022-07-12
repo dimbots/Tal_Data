@@ -1,0 +1,77 @@
+# Peak calling with peakC
+
+setwd("/media/dimbo/10T/data/tal_data/4C/1766_1769/pipe4C/")
+
+library(peakC)
+pipe4CFunctionsFile <- "functions.R"
+source(pipe4CFunctionsFile)
+
+
+resultsDir <- "./outF/RDS/"
+
+setwd(resultsDir)
+
+# Alb878
+rdsFiles <- c("Alb878.rds")
+resPeakC <- doPeakC(rdsFiles = rdsFiles)
+
+pdf("Alb878_peaks.pdf", width = 14, height = 8)
+plot_C(resPeakC,y.max=750)
+dev.off()
+
+resPeaks <- getPeakCPeaks(resPeakC=resPeakC)
+
+peaksFile <- "./outF/Alb878_peakC_peaks.bed"
+setwd("/media/dimbo/10T/data/tal_data/4C/1766_1769/pipe4C/")
+exportPeakCPeaks(resPeakC=resPeakC,bedFile=peaksFile,name="Alb878_peakC_peaks")
+
+# Cyp2f2
+setwd(resultsDir)
+
+rdsFiles <- c("Cyp2f2.rds")
+resPeakC <- doPeakC(rdsFiles = rdsFiles)
+
+pdf("Cyp2f2_peaks.pdf", width = 14, height = 8)
+plot_C(resPeakC,y.max=750)
+dev.off()
+
+resPeaks <- getPeakCPeaks(resPeakC=resPeakC)
+
+peaksFile <- "./outF/Cyp2f2_peakC_peaks.bed"
+setwd("/media/dimbo/10T/data/tal_data/4C/1766_1769/pipe4C/")
+exportPeakCPeaks(resPeakC=resPeakC,bedFile=peaksFile,name="Cypf2_peakC_peaks")
+
+# Dio1
+setwd(resultsDir)
+
+rdsFiles <- c("Dio1.rds")
+resPeakC <- doPeakC(rdsFiles = rdsFiles)
+
+pdf("Dio1_peaks.pdf", width = 14, height = 8)
+plot_C(resPeakC,y.max=750)
+dev.off()
+
+resPeaks <- getPeakCPeaks(resPeakC=resPeakC)
+
+peaksFile <- "./outF/Dio1_peakC_peaks.bed"
+setwd("/media/dimbo/10T/data/tal_data/4C/1766_1769/pipe4C/")
+exportPeakCPeaks(resPeakC=resPeakC,bedFile=peaksFile,name="Dio1_peakC_peaks")
+
+
+
+# Dio1
+setwd(resultsDir)
+
+rdsFiles <- c("Gpc3.rds")
+resPeakC <- doPeakC(rdsFiles = rdsFiles)
+
+pdf("Gpc3_peaks.pdf", width = 14, height = 8)
+plot_C(resPeakC,y.max=750)
+dev.off()
+
+resPeaks <- getPeakCPeaks(resPeakC=resPeakC)
+
+peaksFile <- "./outF/Gpc3_peakC_peaks.bed"
+setwd("/media/dimbo/10T/data/tal_data/4C/1766_1769/pipe4C/")
+exportPeakCPeaks(resPeakC=resPeakC,bedFile=peaksFile,name="Gpc3_peakC_peaks")
+
