@@ -1,0 +1,91 @@
+default:
+ fragFolder: /media/dimbo/10T/data/TAL_LAB/Analysis/4C/bowtie2_FRAG
+ normalizeFactor: 1000000
+ qualityCutoff : 0
+ trimLength : 0
+ minAmountReads : 1000
+ readsQuality : 1
+ cores : 8
+ wSize : 21
+ nTop : 2
+ alnStart : TRUE
+ mapUnique : TRUE
+ nonBlind : FALSE
+ wig : FALSE
+ bigwig : TRUE
+ cisplot : TRUE
+ genomePlot : TRUE
+ tsv : FALSE
+ bins : FALSE
+ mismatchMax : 0
+ chr_random : FALSE
+ chr_fix : FALSE
+ chrUn : FALSE
+ chrM : FALSE
+ prefix : chr
+ 
+ enzymes:
+  -
+    BamHI
+    GGATCC
+  -
+    BfaI
+    CTAG
+  -
+    Csp6I
+    GTAC
+  -
+    DpnII
+    GATC
+  -
+    EcoRI
+    GAATTC
+  -
+    HindIII
+    AAGCTT
+  -
+    MboI
+    GATC
+  -
+    NlaIII
+    CATG
+  -
+    XbaI
+    TCTAGA
+ genomes:
+  -
+    mm9
+    BSgenome.Mmusculus.UCSC.mm9
+  -
+    mm10
+    BSgenome.Mmusculus.UCSC.mm10
+  -
+    hg19
+    BSgenome.Hsapiens.UCSC.hg19
+  -
+    hg38
+    BSgenome.Hsapiens.UCSC.hg38
+  
+    
+ bowtie2:
+  -
+    mm9
+    /media/dimbo/10T/data/talianidis_data/Genomes/4_C/mm9_d/
+  -
+    mm10
+    /media/dimbo/10T/data/TAL_LAB/Genomes/bowtie2_index/
+  -
+    hg19    
+    /data2/repository/genome/hg19/Bowtie2Index/
+  -
+    hg38    
+    /data2/repository/genome/hg38/Bowtie2Index/
+
+    
+    
+ plot:
+  maxY: 2500
+  plotView: 1000000
+  xaxisUnit: 'Mb'
+  plotType: 'PDF'
+  binSize: 25000

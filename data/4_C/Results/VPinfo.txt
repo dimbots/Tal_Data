@@ -1,0 +1,5 @@
+expname	spacer	primer	firstenzyme	secondenzyme	genome	vpchr	vppos	analysis	fastq
+Alb878	0	AGATAAACAATTTCCCGAAGATG	DpnII	Csp6I	mm10	5	90449400	all	Alb878.fastq.gz
+Cyp2f2	0	GCTGGAGCCTTGAAAGCTAG	DpnII	Csp6I	mm10	7	27110700	all	Cyp2f2.fastq.gz
+Dio1	0	GGGCTAAGTGTGCTGCTACAG	DpnII	Csp6I	mm10	4	107306800	all	Dio1.fastq.gz
+Gpc3	0	TCCATAACGTTGTCATGCTTC	DpnII	Csp6I	mm10	X	52623000	all	Gpc3.fastq.gz

@@ -1,0 +1,46 @@
+# Filter reads that have no primer from Dio1
+grep -B1 -A2 "GGGCTAAGTGTGCTGCTACAG" Dio1.fastq | sed '/--/d' > Dio1_noPrimer.fastq
+
+# Filter reads that have the 33 bases after "GATC"
+# TTCTGACTCCTTTTTGCTGTTGCTGCTGTTGT
+export PAT=TTCTGACTCCTTTTTGCTGTTGCTGCTGTTGT A=2 B=1
+vim -Nes "+g/${PAT}/.-${B},.+${A}d" '+w !tee' '+q!' Dio1_noPrimer.fastq > Dio1_noPrimer_Filt_33bp.fastq
+
+# Trim first bases until GATC
+seqtk trimfq -b 33 Dio1_noPrimer_Filt_33bp.fastq > Dio1_noPrimer_Filt_33bp.T.fastq
+
+##########################################################################################################
+
+# Alb878
+grep -B1 -A2 "AGATAAACAATTTCCCGAAGAT" Alb878.fastq | sed '/--/d' > Alb878_noPrimer.fastq
+	      
+export PATALB878=TGTTCCTTTCTTCGGGGATATTATTTTTTGAA A=2 B=1
+
+vim -Nes "+g/${PATALB878}/.-${B},.+${A}d" '+w !tee' '+q!' Alb878_noPrimer.fastq > Alb878_noPrimer_Filt_33bp.fastq
+
+seqtk trimfq -b 27 Alb878_noPrimer_Filt_33bp.fastq > Alb878_noPrimer_Filt_33bp.T.fastq
+
+
+##########################################################################################################
+
+# Cyp2f2
+
+grep -B1 -A2 "GCTGGAGCCTTGAAAGCTAG" Cyp2f2.fastq | sed '/--/d' > Cyp2f2_noPrimer.fastq
+
+export PATCYP=TAGGTTGTCTAAAGTACTGAAAGAATCTGGCC A=2 B=1
+
+vim -Nes "+g/${PATCYP}/.-${B},.+${A}d" '+w !tee' '+q!' Cyp2f2_noPrimer.fastq > Cyp2f2_noPrimer_Filt_33bp.fastq
+
+seqtk trimfq -b 38 Cyp2f2_noPrimer_Filt_33bp.fastq > Cyp2f2_noPrimer_Filt_33bp.T.fastq
+
+
+##########################################################################################################
+
+# GPC3
+grep -B1 -A2 "TCCATAACGTTGTCATGCTTC" Gpc3.fastq | sed '/--/d' > Gpc3_noPrimer.fastq
+
+export PATGPC3=AATGTGTTGCGACATAAGTTAAAGCAAGTTAA A=2 B=1
+
+vim -Nes "+g/${PATGPC3}/.-${B},.+${A}d" '+w !tee' '+q!' Gpc3_noPrimer.fastq > Gpc3_noPrimer_Filt_33bp.fastq
+
+seqtk trimfq -b 30 Gpc3_noPrimer_Filt_33bp.fastq > Gpc3_noPrimer_Filt_33bp.T.fastq
