@@ -1,7 +1,7 @@
 plotFingerprint -b Set8KO_LaminAC_Enrichment.bam WT_LaminAC_Enrichment.bam --labels Set8KO_LaminAC WT_LaminAC --skipZeros --plotFile fingerprints_LaminAC.png --outRawCounts fingerprints_LaminAC.tab -p 8 -T "Fingerprints of peak enriched regions"
 
 
-computeMatrix reference-point --referencePoint center -S WT_LaminAC.bw -R WT_LaminAC.downsampled-W200-G600.scoreisland -b 2000 -a 2000 --skipZeros -p 8 -out Matrix_WT
+computeMatrix reference-point --referencePoint center -S WT_LaminAC.bw -R WT_LaminAC.downsampled-W200-G600.scoreisland -b 5000 -a 5000 --skipZeros -p 8 -out Matrix_WT
 
 plotHeatmap -m Matrix_KO -out HEATMAP_KO.png --interpolationMethod nearest -z "Peaks" -x " " --boxAroundHeatmaps no  --colorList white,whitesmoke,seashell,mistyrose,salmon,r
 
