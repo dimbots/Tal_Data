@@ -1,0 +1,1 @@
+sicer -t Set8KO_LaminAC.bam -s mm10 -w 200 -g 600 --false_discovery_rate 0.001 --effective_genome_fraction 0.88 -o Set8KO -cpu 7 > "Sicer_Set8KO.log" 2>&1
