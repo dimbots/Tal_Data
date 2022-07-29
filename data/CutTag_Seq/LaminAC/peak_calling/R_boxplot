@@ -1,0 +1,24 @@
+library(tidyverse)
+library(hrbrthemes)
+library(viridis)
+
+setwd("/media/dimbo/10T/data/TAL_LAB/Analysis/Cut_Tag/LaminAC/peak_calling/peak_length/")
+
+data1=read.table(file = "peak_length_merged", sep = "\t", header = FALSE)
+
+# Plot
+
+data1 %>%
+  ggplot( aes(x=V1, y=V2, fill=V1)) +
+  geom_boxplot() +
+  theme_ipsum() +
+  ylim(0,6000) +
+  xlab(" ") +
+  ylab(" ") +
+  theme(axis.text = element_text(size = 19, face="bold")) +
+  scale_fill_manual(values = c("darkolivegreen4", "coral3")) +
+  theme(
+    legend.position="none",
+    plot.title = element_text(size=12)
+  ) +
+  ggtitle("Peaks Length In Base Pairs") 
